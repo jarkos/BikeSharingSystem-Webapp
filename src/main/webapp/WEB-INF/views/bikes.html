@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/common-layout">
+
+<head>
+    <title>Lista rowerów</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+</head>
+
+<body th:with="page='bikes'">
+
+<div layout:fragment="content">
+    <a href="#" th:href="@{/admin/bikes/create}" class="btn btn-primary btn-lg active" role="button">Add New Bike</a>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Manufacturer</th>
+                <th>Model</th>
+                <th>Serial number</th>
+                <th>Created Date</th>
+                <th>Updated Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="bike, bikeStat : ${bikeList}">
+                <td th:text="${bikeStat.count}">1</td>
+                <td th:text="${bike.manufacturer}">Admin</td>
+                <td th:text="${bike.model}">admin@oneous.com</td>
+                <td th:text="${bike.serialNumber}">admin@oneous.com</td>
+                <td th:text="${bike.created}">25/10/2014</td>
+                <td th:text="${bike.updated}">25/10/2014</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

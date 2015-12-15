@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/common-layout">
+<head>
+    <title>Lista użytkowników</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+</head>
+
+<body th:with="page='users'">
+
+<div class="alert alert-info" role="alert">...</div>
+<div id="infoDeleted" th:if="${(param.deleted != null) and (param.deleted[0] == 'true')}">
+    <div class="alert alert-info" role="alert">Usunięto użytkownika!</div>
+</div>
+
+<div id="infoCreated" th:if="${(param.created != null) and (param.created[0] == 'true')}">
+    <div class="alert alert-info" role="alert">Dodano użytkownika!</div>
+</div>
+
+<div id="infoEdited" th:if="${(param.edited != null) and (param.edited[0] == 'true')}">
+    <div class="alert alert-info" role="alert">Zapisano edycje użytkownika!</div>
+</div>
+<div layout:fragment="content">
+    <a href="addUser" th:href="@{/admin/users/create}" class="btn btn-primary btn-lg active" role="button">Dodaj użytkownika</a>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th th:text="#{label.username}">Name</th>
+                <th th:text="#{label.email}">Email</th>
+                <th>Roles</th>
+                <th>Created Date</th>
+                <th>Updated Date</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user, userStat : ${userList}">
+                <td th:text="${userStat.count}">1</td>
+                <td th:text="${user.username}">Admin</td>
+                <td th:text="${user.email}">admin@oneous.com</td>
+                <td th:text="${#strings.listJoin(user.roles, ', ')}">User,Admin</td>
+                <td th:text="${user.created}">25/10/2014</td>
+                <td th:text="${user.updated}">25/10/2014</td>
+                <td><a href="editUser" th:href="@{/admin/users/{id}/edit/(id=${user.id})}">edytuj</a></td>
+                <td><a href="deleteUser" th:href="@{/admin/users/{id}/delete/(id=${user.id})}">usuń</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

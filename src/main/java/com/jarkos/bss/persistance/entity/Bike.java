@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 @Entity
 public class Bike extends Persistent {
 
-
     private static final long serialVersionUID = 4964532837112242431L;
+
     @Column(nullable = false)
     private String manufacturer;
 

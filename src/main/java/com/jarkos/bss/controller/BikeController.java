@@ -50,7 +50,7 @@ public class BikeController {
         bike.setEnabled(true);
         bikeService.saveBike(bike);
 
-        return "redirect:/admin/bikes";
+        return "redirect:/admin/bikes?created";
     }
 
     @RequestMapping(value = "/admin/bikes/{id}/delete", method = RequestMethod.GET)
@@ -66,5 +66,19 @@ public class BikeController {
             return "redirect:/admin/bikes?deleted=true";
         }
         return "redirect:/admin/bikes?deleted=false";
+    }
+
+    @RequestMapping(value = "/admin/bikes/{id}/edit", method = RequestMethod.GET)
+    public String editBikeForm(@PathVariable int id, Model model) {
+        Bike bike = bikeService.findBikeById(id);
+        model.addAttribute("bike", bike);
+        return "bikes-edit";
+    }
+
+    @RequestMapping(value = "/admin/bikes/{id}/edit", method = RequestMethod.POST)
+    public String editBike(@Valid Bike bike, @PathVariable int id) {
+        log.debug("editBike, id={}", id);
+        bikeService.updateBike(bike);
+        return "redirect:/admin/bikes?edited=true";
     }
 }

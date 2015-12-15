@@ -28,7 +28,7 @@ public class BikeDao {
     }
 
     public List<Bike> findAllBikes() {
-        List<Bike> bikes =  entityManager.createQuery("FROM Bike", Bike.class).getResultList();
+        List<Bike> bikes = entityManager.createQuery("FROM Bike", Bike.class).getResultList();
         TypedQuery<Bike> query = entityManager.createQuery("FROM Bike", Bike.class);
         Bike b = getSingleResultOrNull(query);
         return entityManager.createQuery("SELECT b FROM Bike AS b", Bike.class).getResultList();
@@ -42,7 +42,6 @@ public class BikeDao {
         return getSingleResultOrNull(query);
     }
 
-    //reference: http://stackoverflow.com/questions/2002993/jpa-getsingleresult-or-null
     private Bike getSingleResultOrNull(TypedQuery<Bike> query) {
         query.setMaxResults(1);
         List<Bike> list = query.getResultList();
@@ -53,6 +52,6 @@ public class BikeDao {
     }
 
     public void delete(Bike bike) {
-        entityManager.remove(bike);
+        entityManager.remove(entityManager.contains(bike) ? bike : entityManager.merge(bike));
     }
 }

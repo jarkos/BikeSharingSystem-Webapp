@@ -11,8 +11,20 @@
 
 <body th:with="page='bikes'">
 
+<div id="infoDeleted" th:if="${(param.deleted != null) and (param.deleted[0] == 'true')}">
+    <div class="alert alert-info" role="alert">Usunięto rower!</div>
+</div>
+
+<div id="infoCreated" th:if="${(param.created != null) and (param.created[0] == 'true')}">
+    <div class="alert alert-info" role="alert">Dodano rower!</div>
+</div>
+
+<div id="infoEdited" th:if="${(param.edited != null) and (param.edited[0] == 'true')}">
+    <div class="alert alert-info" role="alert">Zapisano edycje roweru!</div>
+</div>
+
 <div layout:fragment="content">
-    <a href="#" th:href="@{/admin/bikes/create}" class="btn btn-primary btn-lg active" role="button">Add New Bike</a>
+    <a href="#" th:href="@{/admin/bikes/create}" class="btn btn-primary btn-lg active" role="button">Dodaj rower</a>
 
     <div class="table-responsive">
         <table class="table table-striped">
@@ -34,6 +46,8 @@
                 <td th:text="${bike.serialNumber}">admin@oneous.com</td>
                 <td th:text="${bike.created}">25/10/2014</td>
                 <td th:text="${bike.updated}">25/10/2014</td>
+                <td><a href="editBike" th:href="@{/admin/bikes/{id}/edit/(id=${bike.id})}">edytuj</a></td>
+                <td><a href="deleteBike" th:href="@{/admin/bikes/{id}/delete/(id=${bike.id})}">usuń</a></td>
             </tr>
             </tbody>
         </table>

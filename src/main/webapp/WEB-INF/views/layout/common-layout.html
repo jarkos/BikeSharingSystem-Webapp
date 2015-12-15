@@ -6,7 +6,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title layout:title-pattern="$CONTENT_TITLE - $DECORATOR_TITLE">Project Skeleton Title</title>
+    <title layout:title-pattern="$CONTENT_TITLE - $DECORATOR_TITLE">Bike Sharing System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <link rel="icon" href="../../../resources/images/favicon.ico" th:href="@{/resources/images/favicon.ico}"/>
     <link rel="stylesheet" type="text/css" media="all" href="../../../resources/bootstrap-3.3.0/css/bootstrap.css"
@@ -33,14 +33,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Oneous.com</a>
+            <a class="navbar-brand" href="#">Bike Sharing System</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" th:href="@{/home}">Dashboard</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#" th:href="@{/logout}">Logout</a></li>
+                <li><a href="#">Ustawienia</a></li>
+                <li><a href="#">Profil</a></li>
+                <li><a href="#" th:href="@{/logout}">Wyloguj</a></li>
             </ul>
         </div>
     </div>
@@ -54,7 +54,7 @@
 
             <ul class="nav nav-sidebar">
                 <li th:classappend="${page == 'home' ? 'active' : ''}">
-                    <a href="../home.html" th:href="@{/home}">Overview</a>
+                    <a href="../home.html" th:href="@{/home}">Strona główna</a>
                 </li>
                 <li th:classappend="${page == 'navitem1' ? 'active' : ''}">
                     <a href="#">Map navi</a>
@@ -62,13 +62,13 @@
             </ul>
             <ul sec:authorize="hasRole('ROLE_ADMIN')" class="nav nav-sidebar">
                 <li th:classappend="${page == 'users' ? 'active' : ''}">
-                    <a href="#" th:href="@{/admin/users}">User List</a>
+                    <a href="#" th:href="@{/admin/users}">Użytkownicy</a>
                 </li>
             </ul>
 
             <ul sec:authorize="hasRole('ROLE_ADMIN')" class="nav nav-sidebar">
                 <li th:classappend="${page == 'bikes' ? 'active' : ''}">
-                    <a href="#" th:href="@{/admin/bikes}">Bike List</a>
+                    <a href="#" th:href="@{/admin/bikes}">Rowery</a>
                 </li>
             </ul>
 

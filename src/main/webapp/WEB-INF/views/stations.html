@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/common-layout">
+
+<head>
+    <title>Lista stacji</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+</head>
+
+<body th:with="page='stations'">
+
+<div id="infoDeleted" th:if="${(param.deleted != null) and (param.deleted[0] == 'true')}">
+    <div class="alert alert-info" role="alert">Usunięto stacje!</div>
+</div>
+
+<div id="infoCreated" th:if="${(param.created != null) and (param.created[0] == 'true')}">
+    <div class="alert alert-info" role="alert">Dodano stacje!</div>
+</div>
+
+<div id="infoEdited" th:if="${(param.edited != null) and (param.edited[0] == 'true')}">
+    <div class="alert alert-info" role="alert">Zapisano edycje stacji!</div>
+</div>
+
+<div layout:fragment="content">
+    <a href="#" th:href="@{/admin/stations/create}" class="btn btn-primary btn-lg active" role="button">Dodaj stacje</a>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Addres</th>
+                <th>L. zajętych miejsc</th>
+                <th>Liczba stojaków</th>
+                <th>Lista rowerów</th>
+                <th>Dodaj</th>
+                <th>Konfiguracja</th>
+                <th>Usuń</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="station, stationStat : ${stationList}">
+                <td th:text="${station.count}">1</td>
+                <td th:text="${station.address}"> </td>
+                <td th:text="${station.takenSpaces}"> </td>
+                <td th:text="${station.spaceNumber}"> </td>
+                <td th:text="${station.created}">25/10/2014</td>
+                <td th:text="${station.updated}">25/10/2014</td>
+                <td><a href="editStation" th:href="@{/admin/stations/{id}/edit/(id=${station.id})}">edytuj</a></td>
+                <td><a href="deleteStation" th:href="@{/admin/stations/{id}/delete/(id=${station.id})}">usuń</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

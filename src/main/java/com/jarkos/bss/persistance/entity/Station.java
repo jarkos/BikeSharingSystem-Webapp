@@ -14,7 +14,7 @@ public class Station extends Persistent{
     private static final long serialVersionUID = 3402431765055829231L;
 
     @Column(nullable = false)
-    private String locationName;
+    private String address;
 
     @Column(nullable = false)
     private String latitude;
@@ -33,16 +33,16 @@ public class Station extends Persistent{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
     private Collection<Bike> bikes;
 
-    public String getLocationName() {
-        return locationName;
-    }
-
-    public void setLocationName(String locationName) {
-        this.locationName = locationName;
-    }
-
     public String getLatitude() {
         return latitude;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAdress(String adress) {
+        this.address = adress;
     }
 
     public void setLatitude(String latitude) {

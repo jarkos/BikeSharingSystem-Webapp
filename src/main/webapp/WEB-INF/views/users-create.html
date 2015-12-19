@@ -48,7 +48,7 @@
             <div class="col-sm-10">
                 <div class="form-control" style="border: none">
                     <label class="checkbox-inline"
-                           th:each="role : ${T(com.oneous.webapp.persistance.enums.Role).values()}">
+                           th:each="role : ${T(com.jarkos.bss.persistance.enums.Role).values()}">
                         <input type="checkbox" th:field="*{roles}" th:value="${role}"/> <span th:text="${role.name()}"/>
                     </label>
                 </div>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/common-layout">
+
+<head>
+    <title>Dodanie nowej stacji</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+</head>
+
+<body th:with="page='stations'">
+
+<div layout:fragment="content">
+
+    <form class="form-horizontal" role="form" action="#" th:action="@{/admin/stations/create}" th:object="${station}"
+          method="post">
+        <div class="form-group" th:class="${#fields.hasErrors('spaceNumber')}? 'form-group has-error' : 'form-group'">
+            <label for="inputSpaceNumber" class="col-sm-2 control-label" th:text="#{label.spaceNumber}">SpaceNumber</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputSpaceNumber" th:field="*{spaceNumber}" placeholder="SpaceNumber"/>
+                <label class="control-label" for="inputSpaceNumber" th:errors="*{spaceNumber}">Error!</label>
+            </div>
+        </div>
+        <div class="form-group" th:class="${#fields.hasErrors('latitude')}? 'form-group has-error' : 'form-group'">
+            <label for="inputLatitude" class="col-sm-2 control-label" th:text="#{label.latitude}">SerialNumber</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputLatitude" th:field="*{latitude}" placeholder="Latitude"/>
+                <label class="control-label" for="inputLatitude" th:errors="*{latitude}">Error!</label>
+            </div>
+        </div>
+
+        <div class="form-group" th:class="${#fields.hasErrors('latitude')}? 'form-group has-error' : 'form-group'">
+            <label for="inputLongitude" class="col-sm-2 control-label" th:text="#{label.longitude}">Longitude</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputLongitude" th:field="*{longitude}" placeholder="Longitude"/>
+                <label class="control-label" for="inputLongitude" th:errors="*{longitude}">Error!</label>
+            </div>
+        </div>
+
+        <div class="form-group" th:class="${#fields.hasErrors('locationAddress')}? 'form-group has-error' : 'form-group'">
+            <label for="inputLocationAddress" class="col-sm-2 control-label" th:text="#{label.locationAddress}">LocationAddress</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputLocationAddress" th:field="*{locationAddress}" placeholder="LocationAddress"/>
+                <label class="control-label" for="inputLocationAddress" th:errors="*{locationAddress}">Error!</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+</body>
+</html>

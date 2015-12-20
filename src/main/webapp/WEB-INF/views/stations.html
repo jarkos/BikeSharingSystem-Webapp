@@ -29,20 +29,20 @@
         <table class="table table-striped">
             <thead>
             <tr>
+                <th>Nr</th>
                 <th>ID</th>
                 <th>Addres</th>
                 <th>L. zajętych miejsc</th>
                 <th>Liczba stojaków</th>
-                <th>Lista rowerów</th>
-                <th>Dodaj</th>
                 <th>Konfiguracja</th>
                 <th>Usuń</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="station, stationStat : ${stationList}">
-                <td th:text="${station.count}">1</td>
-                <td th:text="${station.address}"> </td>
+                <td th:text="${stationStat.count}">1</td>
+                <td th:text="${station.id}">1</td>
+                <td th:text="${station.locationAddress}"> </td>
                 <td th:text="${station.takenSpaces}"> </td>
                 <td th:text="${station.spaceNumber}"> </td>
                 <td th:text="${station.created}">25/10/2014</td>

@@ -1,9 +1,6 @@
 package com.jarkos.bss.persistance.entity;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
-import java.util.Collection;
 
 /**
  * Created by Jarek on 2015-12-15.
@@ -13,8 +10,8 @@ public class Station extends Persistent{
 
     private static final long serialVersionUID = 3402431765055829231L;
 
-    @Column(nullable = false)
-    private String address;
+    @Column(nullable = true)
+    private String locationAddress;
 
     @Column(nullable = false)
     private String latitude;
@@ -25,24 +22,24 @@ public class Station extends Persistent{
     @Column(nullable = false)
     private int spaceNumber;
 
-    @Column(nullable = false)
+    @Column
     private int takenSpaces;
 
-    @NotEmpty
-    @Column(name = "bikes", nullable = false)
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
-    private Collection<Bike> bikes;
+//    @ElementCollection(targetClass = Bike.class, fetch = FetchType.EAGER)
+//    @CollectionTable(name = "bike", joinColumns = @JoinColumn(name = "bike_id"))
+//    @Column(name = "bikes", nullable = true)
+//    private Collection<Bike> bikes;
 
     public String getLatitude() {
         return latitude;
     }
 
-    public String getAddress() {
-        return address;
+    public String getLocationAddress() {
+        return locationAddress;
     }
 
-    public void setAdress(String adress) {
-        this.address = adress;
+    public void setAdress(String address) {
+        this.locationAddress = address;
     }
 
     public void setLatitude(String latitude) {
@@ -57,13 +54,13 @@ public class Station extends Persistent{
         this.longitude = longitude;
     }
 
-    public Collection<Bike> getBikes() {
-        return bikes;
-    }
-
-    public void setBikes(Collection<Bike> bikes) {
-        this.bikes = bikes;
-    }
+//    public Collection<Bike> getBikes() {
+//        return bikes;
+//    }
+//
+//    public void setBikes(Collection<Bike> bikes) {
+//        this.bikes = bikes;
+//    }
 
     public int getSpaceNumber() {
         return spaceNumber;

@@ -1,15 +1,14 @@
 package com.jarkos.bss.persistance.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by Jarek on 2015-12-15.
  */
 @Entity
+@AttributeOverride(name = "id", column = @Column(name = "station_id"))
 public class Station extends Persistent{
 
     private static final long serialVersionUID = 3402431765055829231L;
@@ -29,11 +28,9 @@ public class Station extends Persistent{
     @Column
     private int takenSpaces;
 
-    //    @ElementCollection(targetClass = Bike.class, fetch = FetchType.EAGER)
-//    @CollectionTable(name = "bike", joinColumns = @JoinColumn(name = "bike_id"))
-//    @Column(name = "bikes", nullable = true)
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
-//    private Set<Bike> bikes;
+    @Column(name = "listOfBikes", nullable = true)
+    @ElementCollection(targetClass = Bike.class, fetch = FetchType.EAGER)
+    private Set<Bike> bikes = new HashSet<>();
 
     public String getLocationAddress() {
         return locationAddress;
@@ -75,11 +72,11 @@ public class Station extends Persistent{
         this.takenSpaces = takenSpaces;
     }
 
-//    public Set<Bike> getBikes() {
-//        return bikes;
-//    }
-//
-//    public void setBikes(Set<Bike> bikes) {
-//        this.bikes = bikes;
-//    }
+    public Set<Bike> getBikes() {
+        return bikes;
+    }
+
+    public void setBikes(Set<Bike> bikes) {
+        this.bikes = bikes;
+    }
 }

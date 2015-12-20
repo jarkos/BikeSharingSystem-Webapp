@@ -1,5 +1,6 @@
 package com.jarkos.bss.persistance.entity;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -7,6 +8,7 @@ import javax.persistence.Entity;
  * Created by Jarek on 2015-12-01.
  */
 @Entity
+@AttributeOverride(name = "id", column = @Column(name = "bike_id"))
 public class Bike extends Persistent {
 
     private static final long serialVersionUID = 4964532837112242431L;

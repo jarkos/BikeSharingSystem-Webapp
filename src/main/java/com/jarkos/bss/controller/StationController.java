@@ -1,6 +1,8 @@
 package com.jarkos.bss.controller;
 
+import com.jarkos.bss.persistance.entity.Bike;
 import com.jarkos.bss.persistance.entity.Station;
+import com.jarkos.bss.service.BikeService;
 import com.jarkos.bss.service.StationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Jarek on 2015-12-15.
@@ -24,6 +28,9 @@ public class StationController {
 
     @Autowired
     private StationService stationService;
+
+    @Autowired
+    private BikeService bikeService;
 
     @RequestMapping("/admin/stations")
     public String getStationsList(Model model) {
@@ -47,6 +54,15 @@ public class StationController {
         if (bindingResult.hasErrors()) {
             return "stations-create";
         }
+        Set<Bike> bi =  new HashSet<Bike>();
+        Bike b1 = new Bike();
+        b1.setEnabled(true);
+        b1.setManufacturer("DOPK");
+        b1.setModel("MODELCYS");
+        b1.setSerialNumber("1242134");
+        bikeService.saveBike(b1);
+        bi.add(b1);
+        station.setBikes(bi);
         station.setTakenSpaces(0);
         stationService.saveStation(station);
 

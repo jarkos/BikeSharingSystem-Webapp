@@ -1,6 +1,5 @@
 package com.jarkos.bss.controller;
 
-import com.jarkos.bss.persistance.entity.Bike;
 import com.jarkos.bss.persistance.entity.Station;
 import com.jarkos.bss.service.StationService;
 import org.slf4j.Logger;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 
 /**
  * Created by Jarek on 2015-12-15.
@@ -49,7 +47,6 @@ public class StationController {
         if (bindingResult.hasErrors()) {
             return "stations-create";
         }
-        station.setAdress("adresik"); //TODO poprawic dodawanie adresu
         station.setTakenSpaces(0);
         stationService.saveStation(station);
 

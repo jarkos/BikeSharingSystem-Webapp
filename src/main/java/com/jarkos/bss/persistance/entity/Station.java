@@ -1,6 +1,10 @@
 package com.jarkos.bss.persistance.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import java.util.Set;
 
 /**
  * Created by Jarek on 2015-12-15.
@@ -25,21 +29,22 @@ public class Station extends Persistent{
     @Column
     private int takenSpaces;
 
-//    @ElementCollection(targetClass = Bike.class, fetch = FetchType.EAGER)
+    //    @ElementCollection(targetClass = Bike.class, fetch = FetchType.EAGER)
 //    @CollectionTable(name = "bike", joinColumns = @JoinColumn(name = "bike_id"))
 //    @Column(name = "bikes", nullable = true)
-//    private Collection<Bike> bikes;
-
-    public String getLatitude() {
-        return latitude;
-    }
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
+//    private Set<Bike> bikes;
 
     public String getLocationAddress() {
         return locationAddress;
     }
 
-    public void setAdress(String address) {
-        this.locationAddress = address;
+    public void setLocationAddress(String locationAddress) {
+        this.locationAddress = locationAddress;
+    }
+
+    public String getLatitude() {
+        return latitude;
     }
 
     public void setLatitude(String latitude) {
@@ -53,14 +58,6 @@ public class Station extends Persistent{
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
-
-//    public Collection<Bike> getBikes() {
-//        return bikes;
-//    }
-//
-//    public void setBikes(Collection<Bike> bikes) {
-//        this.bikes = bikes;
-//    }
 
     public int getSpaceNumber() {
         return spaceNumber;
@@ -77,4 +74,12 @@ public class Station extends Persistent{
     public void setTakenSpaces(int takenSpaces) {
         this.takenSpaces = takenSpaces;
     }
+
+//    public Set<Bike> getBikes() {
+//        return bikes;
+//    }
+//
+//    public void setBikes(Set<Bike> bikes) {
+//        this.bikes = bikes;
+//    }
 }

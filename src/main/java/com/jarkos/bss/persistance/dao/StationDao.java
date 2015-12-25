@@ -29,7 +29,7 @@ public class StationDao {
         entityManager.merge(station);
     }
 
-    public List<Station> findAllStaions() {
+    public List<Station> findAllStations() {
         List<Station> stations = entityManager.createQuery("FROM Station", Station.class).getResultList();
         TypedQuery<Station> query = entityManager.createQuery("FROM Station", Station.class);
         Station b = getSingleResultOrNull(query);

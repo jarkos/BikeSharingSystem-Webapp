@@ -23,7 +23,7 @@ public class StationService {
     }
 
     public List<Station> findAllStations(){
-        return stationDao.findAllStaions();
+        return stationDao.findAllStations();
     }
 
     public Station saveStation(Station station) {

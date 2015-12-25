@@ -57,7 +57,7 @@
                     <a href="../home.html" th:href="@{/home}">Strona główna</a>
                 </li>
                 <li th:classappend="${page == 'navitem1' ? 'active' : ''}">
-                    <a href="#">Moduł mapy</a>
+                    <a href="#" th:href="@{/admin/map}">Moduł mapy</a>
                 </li>
             </ul>
             <ul sec:authorize="hasRole('ROLE_ADMIN')" class="nav nav-sidebar">
@@ -87,6 +87,12 @@
             <ul sec:authorize="hasRole('ROLE_ADMIN')" class="nav nav-sidebar">
                 <li th:classappend="${page == 'notyfy' ? 'active' : ''}">
                     <a href="#" th:href="@{/admin/bikes}">Powiadomienia</a>
+                </li>
+            </ul>
+
+            <ul sec:authorize="hasRole('ROLE_ADMIN')" class="nav nav-sidebar">
+                <li th:classappend="${page == 'stations' ? 'active' : ''}">
+                    <a href="#" th:href="@{/admin/stations}">Stacje</a>
                 </li>
             </ul>
 

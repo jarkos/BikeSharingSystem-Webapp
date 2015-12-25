@@ -1,5 +1,7 @@
 package com.jarkos.bss.persistance.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,13 +15,16 @@ public class Bike extends Persistent {
 
     private static final long serialVersionUID = 4964532837112242431L;
 
+    @NotEmpty
     @Column(nullable = false)
     private String manufacturer;
 
+    @NotEmpty
     @Column(nullable = false)
     private String model;
 
-    @Column(nullable = false)
+    @NotEmpty
+    @Column(nullable = false,  unique = true)
     private String serialNumber;
 
     @Column(nullable = false)

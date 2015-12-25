@@ -11,19 +11,19 @@
 
 <body th:with="page='bikes'">
 
-<div id="infoDeleted" th:if="${(param.deleted != null) and (param.deleted[0] == 'true')}">
-    <div class="alert alert-info" role="alert">Usunięto rower!</div>
-</div>
-
-<div id="infoCreated" th:if="${(param.created != null) and (param.created[0] == 'true')}">
-    <div class="alert alert-info" role="alert">Dodano rower!</div>
-</div>
-
-<div id="infoEdited" th:if="${(param.edited != null) and (param.edited[0] == 'true')}">
-    <div class="alert alert-info" role="alert">Zapisano edycje roweru!</div>
-</div>
-
 <div layout:fragment="content">
+    <div id="infoDeleted" th:if="${(param.deleted != null) and (param.deleted[0] == 'true')}">
+        <div class="alert alert-info" role="alert">Usunięto rower!</div>
+    </div>
+
+    <div id="infoCreated" th:if="${(param.created != null) and (param.created[0] == 'true')}">
+        <div class="alert alert-info" role="alert">Dodano rower!</div>
+    </div>
+
+    <div id="infoEdited" th:if="${(param.edited != null) and (param.edited[0] == 'true')}">
+        <div class="alert alert-info" role="alert">Zapisano edycje roweru!</div>
+    </div>
+
     <a href="#" th:href="@{/admin/bikes/create}" class="btn btn-primary btn-lg active" role="button">Dodaj rower</a>
     <div class="table-responsive">
         <table class="table table-striped">

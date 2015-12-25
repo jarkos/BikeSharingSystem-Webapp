@@ -1,6 +1,9 @@
 package com.jarkos.bss.persistance.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,16 +16,20 @@ public class Station extends Persistent{
 
     private static final long serialVersionUID = 3402431765055829231L;
 
-    @Column(nullable = true)
+    @Column(nullable = true, unique = true)
+    @NotEmpty
     private String locationAddress;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
+    @NotEmpty
     private String latitude;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
+    @NotEmpty
     private String longitude;
 
     @Column(nullable = false)
+    @Min(value = 1)
     private int spaceNumber;
 
     @Column

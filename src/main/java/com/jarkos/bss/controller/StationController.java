@@ -1,8 +1,10 @@
 package com.jarkos.bss.controller;
 
 import com.jarkos.bss.persistance.entity.Bike;
+import com.jarkos.bss.persistance.entity.Location;
 import com.jarkos.bss.persistance.entity.Station;
 import com.jarkos.bss.service.BikeService;
+import com.jarkos.bss.service.LocationService;
 import com.jarkos.bss.service.StationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +34,9 @@ public class StationController {
     @Autowired
     private BikeService bikeService;
 
+    @Autowired
+    private LocationService locationService;
+
     @RequestMapping("/admin/stations")
     public String getStationsList(Model model) {
         log.debug("getStationList");
@@ -41,7 +46,10 @@ public class StationController {
 
     @RequestMapping(value = "/admin/stations/create", method = RequestMethod.GET)
     public String createNewStationForm(Model model) {
-        model.addAttribute("station", new Station());
+        Location location = new Location();
+        Station station = new Station();
+        station.setLocation(location);
+        model.addAttribute("station",station);
         return "stations-create";
     }
 
@@ -64,8 +72,10 @@ public class StationController {
         bi.add(b1);
         station.setBikes(bi);
         station.setTakenSpaces(0);
-        stationService.saveStation(station);
-
+        Station newStation = stationService.saveStation(station);
+        Location location = station.getLocation();
+        location.setStation(newStation);
+        locationService.saveLocaiton(location);
         return "redirect:/admin/stations?created";
     }
 

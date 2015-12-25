@@ -26,8 +26,8 @@ public class StationService {
         return stationDao.findAllStaions();
     }
 
-    public void saveStation(Station station) {
-        stationDao.save(station);
+    public Station saveStation(Station station) {
+       return stationDao.save(station);
     }
 
     public void deleteStation(Station station) {

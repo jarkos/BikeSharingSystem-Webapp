@@ -19,8 +19,10 @@ public class StationDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void save(Station station) {
+    public Station save(Station station) {
         entityManager.persist(station);
+        entityManager.flush();
+        return station;
     }
 
     public void update(Station station) {
@@ -54,5 +56,4 @@ public class StationDao {
     public void delete(Station station) {
         entityManager.remove(entityManager.contains(station) ? station : entityManager.merge(station));
     }
-
 }

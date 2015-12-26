@@ -2,9 +2,7 @@ package com.jarkos.bss.persistance.entity;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 /**
  * Created by Jarek on 2015-12-01.
@@ -26,6 +24,10 @@ public class Bike extends Persistent {
     @NotEmpty
     @Column(nullable = false,  unique = true)
     private String serialNumber;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private BikeStatus bikeStatus;
 
     @Column(nullable = false)
     private boolean enabled;
@@ -52,6 +54,14 @@ public class Bike extends Persistent {
 
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
+    }
+
+    public BikeStatus getBikeStatus() {
+        return bikeStatus;
+    }
+
+    public void setBikeStatus(BikeStatus bikeStatus) {
+        this.bikeStatus = bikeStatus;
     }
 
     public boolean isEnabled() {

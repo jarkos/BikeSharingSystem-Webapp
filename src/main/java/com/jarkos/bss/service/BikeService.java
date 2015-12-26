@@ -2,6 +2,7 @@ package com.jarkos.bss.service;
 
 import com.jarkos.bss.persistance.dao.BikeDao;
 import com.jarkos.bss.persistance.entity.Bike;
+import com.jarkos.bss.persistance.entity.BikeStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +28,9 @@ public class BikeService {
         return bikeDao.findAllBikes();
     }
 
-    public void saveBike(Bike bike) {
+    public void saveNewBike(Bike bike) {
+        bike.setEnabled(true);
+        bike.setBikeStatus(BikeStatus.NEW);
         bikeDao.save(bike);
     }
 

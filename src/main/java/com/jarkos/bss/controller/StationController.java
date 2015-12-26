@@ -63,13 +63,13 @@ public class StationController {
         if (bindingResult.hasErrors()) {
             return "stations-create?created=false";
         }
+        //mock
         Set<Bike> bi =  new HashSet<Bike>();
         Bike b1 = new Bike();
-        b1.setEnabled(true);
         b1.setManufacturer("DOPSK");
         b1.setModel("MODELCYS");
         b1.setSerialNumber("1242134" + Math.random());
-        bikeService.saveBike(b1);
+        bikeService.saveNewBike(b1);
         bi.add(b1);
         station.setBikes(bi);
         station.setTakenSpaces(0);

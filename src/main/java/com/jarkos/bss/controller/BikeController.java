@@ -47,8 +47,7 @@ public class BikeController {
         if (bindingResult.hasErrors()) {
             return "bikes-create";
         }
-        bike.setEnabled(true);
-        bikeService.saveBike(bike);
+        bikeService.saveNewBike(bike);
 
         return "redirect:/admin/bikes?created=true";
     }

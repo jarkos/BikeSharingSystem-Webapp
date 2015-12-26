@@ -50,8 +50,7 @@
 
             <div class="col-sm-10">
                 <div class="form-control" style="border: none">
-                    <label class="checkbox-inline"
-                           th:each="bikeStatus : ${T(com.jarkos.bss.persistance.enums.BikeStatus).values()}">
+                    <label class="checkbox-inline" th:each="bikeStatus : ${T(com.jarkos.bss.persistance.enums.BikeStatus).values()}">
                         <input type="radio" id="bikeStatus" th:field="*{bikeStatus}" th:value="${bikeStatus}"/>
                         <span th:text="${bikeStatus.name()}"/>
                     </label>

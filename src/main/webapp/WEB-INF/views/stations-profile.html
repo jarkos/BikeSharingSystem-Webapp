@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/common-layout">
+<head>
+    <title>Profil stacji</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+</head>
+<body th:with="page='stations'">
+<div layout:fragment="content">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tbody>
+            <div th:object="${station}">
+                <td style="font-size: 34px" th:text="'ID: ' + ${station.id}">3</td>
+                <td style="font-size: 34px" th:text="${station.location.locationAddress}"></td>
+                <td style="font-size: 34px" th:text="'Zajęte: ' + ${station.takenSpaces}"></td>
+                <td style="font-size: 34px" th:text="'Miejsc: ' +${station.spaceNumber}"></td>
+            </div>
+            </tbody>
+        </table>
+    </div>
+    <h3>Lista rowerów na stacji</h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nr</th>
+                <th>ID</th>
+                <th>Producent</th>
+                <th>Model</th>
+                <th>Numer seryjny</th>
+                <th>Status</th>
+                <th>Data utworzenia</th>
+                <th>Data aktualizacji</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="bike, bikeStat : ${bikes}">
+                <td th:text="${bikeStat.count}">1</td>
+                <td th:text="${bike.id}">1</td>
+                <td th:text="${bike.manufacturer}">Admin</td>
+                <td th:text="${bike.model}">admin@oneous.com</td>
+                <td th:text="${bike.serialNumber}">admin@oneous.com</td>
+                <td th:text="${bike.bikeStatus}">Status</td>
+                <td th:text="${bike.created}">25/10/2014</td>
+                <td th:text="${bike.updated}">25/10/2014</td>
+                <td><a href="editBike" th:href="@{/admin/bikes/{id}/edit/(id=${bike.id})}">edytuj</a></td>
+                <td><a href="deleteBike" th:href="@{/admin/bikes/{id}/delete/(id=${bike.id})}">usuń</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

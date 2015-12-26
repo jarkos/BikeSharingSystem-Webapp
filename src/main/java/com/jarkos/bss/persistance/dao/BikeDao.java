@@ -57,8 +57,17 @@ public class BikeDao {
     }
 
     public List<Bike> findAllNewBikes() {
-        TypedQuery<Bike> query = entityManager.createQuery("SELECT b FROM Bike AS b WHERE b.bike_status=:bike_status", Bike.class);
+        TypedQuery<Bike> query = entityManager.createQuery("SELECT b FROM Bike AS b WHERE b.bikeStatus=:bike_status", Bike.class);
         query.setParameter("bike_status", BikeStatus.NEW.name());
+
+        return query.getResultList();
+    }
+
+    public List<Bike> findAllAvailableBikes() {
+        TypedQuery<Bike> query = entityManager.createQuery("SELECT b FROM Bike AS b WHERE " +
+                "b.bikeStatus=:bike_status1 OR b.bikeStatus=:bike_status2", Bike.class);
+        query.setParameter("bike_status1", BikeStatus.NEW);
+        query.setParameter("bike_status2", BikeStatus.TO_BORROW);
 
         return query.getResultList();
     }

@@ -9,5 +9,6 @@ public enum BikeStatus {
     BORROWED,
     TO_BORROW,
     IN_CONSERVATION,
+    CHANGING_STATION,
 
 }

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/common-layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title layout:title-pattern="$CONTENT_TITLE - $DECORATOR_TITLE">Bike Sharing System</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link rel="icon" href="../../../resources/images/favicon.ico" th:href="@{/resources/images/favicon.ico}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../../../resources/bootstrap-3.3.0/css/bootstrap.css"
+          th:href="@{/resources/bootstrap-3.3.0/css/bootstrap.min.css}"/>
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Styles for this template -->
+    <link rel="stylesheet" type="text/css" media="all" href="../../../resources/css/dashboard.css"
+          th:href="@{/resources/css/dashboard.css}"/>
+    <!-- Custom CSS Style -->
+    <link rel="stylesheet" type="text/css" media="all" href="../../../resources/css/custom-style.css"
+          th:href="@{/resources/css/custom-style.css}"/>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script src="../../../resources/js/custom-scripts.js" th:src="@{/resources/js/skrypt.js}"></script>
+    <script src="../../../resources/js/map-skrypt.js" th:src="@{/resources/js/map-skrypt.js}"></script>
+    <script src="../../../resources/js/panel-skrypt.js" th:src="@{/resources/js/panel-skrypt.js}"></script>
+    <style>
+        .clickable {
+            cursor: pointer;
+        }
+
+        .clickable .glyphicon {
+            background: rgba(0, 0, 0, 0.15);
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 4px
+        }
+
+        .panel-heading span {
+            margin-top: -23px;
+            font-size: 15px;
+            margin-right: -9px;
+        }
+
+        a.clickable {
+            color: inherit;
+        }
+
+        a.clickable:hover {
+            text-decoration: none;
+        }
+        #mapCanvas {
+            width: 700px;
+            height: 500px;
+            alignment: center;
+        }
+
+        #infoPanel {
+            float: left;
+            margin-left: 10px;
+        }
+
+        #infoPanel div {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body th:with="page='stations'">
+<div layout:fragment="content">
+
+    <form class="form-horizontal" role="form" action="#" th:action="@{/admin/stations/create}" th:object="${station}"
+          method="post">
+        <div class="form-group" th:class="${#fields.hasErrors('spaceNumber')}? 'form-group has-error' : 'form-group'">
+            <label for="inputSpaceNumber" class="col-sm-2 control-label" th:text="#{label.spaceNumber}">SpaceNumber</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputSpaceNumber" th:field="*{spaceNumber}" placeholder="SpaceNumber"/>
+                <label class="control-label" for="inputSpaceNumber" th:errors="*{spaceNumber}">Error!</label>
+            </div>
+        </div>
+        <div class="form-group" th:class="${#fields.hasErrors('location.latitude')}? 'form-group has-error' : 'form-group'">
+            <label for="inputLatitude" class="col-sm-2 control-label" th:text="#{label.latitude}">Latitude</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputLatitude" readonly="true" th:field="*{location.latitude}" placeholder="Latitude"/>
+                <!--<label class="control-label" for="inputLatitude" th:errors="*{latitude}">Error!</label>-->
+            </div>
+        </div>
+
+        <div class="form-group" th:class="${#fields.hasErrors('location.latitude')}? 'form-group has-error' : 'form-group'">
+            <label for="inputLongitude" class="col-sm-2 control-label" th:text="#{label.longitude}">Longitude</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputLongitude" readonly="true" th:field="*{location.longitude}" placeholder="Longitude"/>
+                <!--<label class="control-label" for="inputLongitude" th:errors="*{longitude}">Error!</label>-->
+            </div>
+        </div>
+
+        <div class="form-group" th:class="${#fields.hasErrors('location.locationAddress')}? 'form-group has-error' : 'form-group'">
+            <label for="inputLocationAddress" class="col-sm-2 control-label" th:text="#{label.locationAddress}">LocationAddress</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputLocationAddress" readonly="true" th:field="*{location.locationAddress}" placeholder="LocationAddress"/>
+                <!--<label class="control-label" for="inputLocationAddress" th:errors="*{locationAddress}">Error!</label>-->
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

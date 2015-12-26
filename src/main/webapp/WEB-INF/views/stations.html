@@ -35,8 +35,11 @@
                 <th>Addres</th>
                 <th>L. zajętych miejsc</th>
                 <th>Liczba stojaków</th>
+                <th>Rowery</th>
                 <th>Konfiguracja</th>
                 <th>Usuń</th>
+                <th>Data dodania</th>
+                <th>Data edycji</th>
             </tr>
             </thead>
             <tbody>
@@ -46,10 +49,11 @@
                 <td th:text="${station.location.locationAddress}"> </td>
                 <td th:text="${station.takenSpaces}"> </td>
                 <td th:text="${station.spaceNumber}"> </td>
+                <td><a href="editStation" th:href="@{/admin/stations/{id}/profile/(id=${station.id})}">lista rowerów</a></td>
+                <td><a href="editStation" th:href="@{/admin/stations/{id}/edit/(id=${station.id})}">konfiguruj</a></td>
+                <td><a href="deleteStation" th:href="@{/admin/stations/{id}/delete/(id=${station.id})}">usuń</a></td>
                 <td th:text="${station.created}">25/10/2014</td>
                 <td th:text="${station.updated}">25/10/2014</td>
-                <td><a href="editStation" th:href="@{/admin/stations/{id}/edit/(id=${station.id})}">edytuj</a></td>
-                <td><a href="deleteStation" th:href="@{/admin/stations/{id}/delete/(id=${station.id})}">usuń</a></td>
             </tr>
             </tbody>
         </table>

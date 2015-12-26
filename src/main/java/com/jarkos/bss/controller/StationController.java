@@ -50,21 +50,21 @@ public class StationController {
         Location location = new Location();
         Station station = new Station();
         station.setLocation(location);
-        model.addAttribute("station",station);
+        model.addAttribute("station", station);
         return "stations-create";
     }
 
     @RequestMapping(value = "/admin/stations/create", method = RequestMethod.POST)
-    public String createNewStation(@Valid Station station, BindingResult bindingResult) {
+    public String createNewStation(@Valid Station station, BindingResult bindingResult) throws Exception {
 
         if (stationService.findStationById(station.getId()) != null) {
             bindingResult.rejectValue("station", "error.stationId.exist");
         }
         if (bindingResult.hasErrors()) {
-            return "stations-create?created=false";
+            return "stations?create=false";
         }
         //mock
-        Set<Bike> bi =  new HashSet<Bike>();
+        Set<Bike> bi = new HashSet<Bike>();
         Bike b1 = new Bike();
         b1.setManufacturer("DOPSK");
         b1.setModel("MODELCYS");
@@ -77,21 +77,49 @@ public class StationController {
         Location location = station.getLocation();
         location.setStation(newStation);
         locationService.saveLocaiton(location);
-        return "redirect:/admin/stations?created=true";
+        return "redirect:/admin/stations?create=true";
     }
 
     @RequestMapping(value = "/admin/stations/{id}/delete", method = RequestMethod.GET)
     public String deleteStationForm(@PathVariable int id) {
         if (id != 0) {
             Station stationToDelete = stationService.findStationById(id);
-            if (stationToDelete != null) {
+            if (!stationToDelete.getBikes().isEmpty()) {
+                log.debug("deleteStationBikesFull, id={}", id);
+                System.out.printf("ERROR. Na stacji " + id + " s¹ dostêpne rowery!");
+                return "redirect:/admin/stations?deleted=false";
+            } else if (stationToDelete != null) {
                 stationService.deleteStation(stationToDelete);
             } else {
-                log.debug("deleteStation, id={}", id);
+                log.debug("deleteStationNoId, id={}", id);
                 System.out.printf("ERROR. Nie ma stacji o takim ID: " + id);
             }
             return "redirect:/admin/stations?deleted=true";
         }
         return "redirect:/admin/stations?deleted=false";
     }
+
+    @RequestMapping(value = "/admin/stations/{id}/edit", method = RequestMethod.GET)
+    public String editStationForm(@PathVariable int id, Model model) {
+        Station station = stationService.findStationById(id);
+        model.addAttribute("station", station);
+        model.addAttribute("bikes", station.getBikes());
+        return "stations-edit";
+    }
+
+    @RequestMapping(value = "/admin/stations/{id}/edit", method = RequestMethod.POST)
+    public String editStation(@Valid Station station, @PathVariable int id) {
+        log.debug("editStation, id={}", id);
+        stationService.updateStation(station);
+        return "redirect:/admin/stations?edited=true";
+    }
+
+    @RequestMapping(value = "/admin/stations/{id}/profile", method = RequestMethod.GET)
+    public String getStationProfile(@PathVariable int id, Model model) {
+        Station station = stationService.findStationById(id);
+        model.addAttribute("station", station);
+        model.addAttribute("bikes", station.getBikes());
+        return "stations-profile";
+    }
+
 }

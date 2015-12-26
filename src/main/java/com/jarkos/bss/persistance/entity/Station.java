@@ -38,7 +38,7 @@ public class Station extends Persistent {
     }
 
     public int getTakenSpaces() {
-        return takenSpaces;
+        return bikes.size();
     }
 
     public void setTakenSpaces(int takenSpaces) {
@@ -49,7 +49,10 @@ public class Station extends Persistent {
         return bikes;
     }
 
-    public void setBikes(Set<Bike> bikes) {
+    public void setBikes(Set<Bike> bikes) throws Exception {
+        if(bikes.size()>(getSpaceNumber()-getTakenSpaces())) {
+         throw new Exception("To many bikes for station!");
+        }
         this.bikes = bikes;
     }
 

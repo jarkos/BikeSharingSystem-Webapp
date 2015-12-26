@@ -26,7 +26,7 @@ public class Bike extends Persistent {
     @Column(nullable = false,  unique = true)
     private String serialNumber;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "status")
     @Enumerated(EnumType.STRING)
     private BikeStatus bikeStatus;
 

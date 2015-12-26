@@ -45,4 +45,8 @@ public class BikeService {
     public void updateBike(Bike bike){
         bikeDao.update(bike);
     }
+
+    public List<Bike> findAllAvailableBikes() {
+        return bikeDao.findAllAvailableBikes();
+    }
 }

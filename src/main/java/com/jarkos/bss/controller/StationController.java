@@ -61,14 +61,14 @@ public class StationController {
             bindingResult.rejectValue("station", "error.stationId.exist");
         }
         if (bindingResult.hasErrors()) {
-            return "stations-create";
+            return "stations-create?created=false";
         }
         Set<Bike> bi =  new HashSet<Bike>();
         Bike b1 = new Bike();
         b1.setEnabled(true);
-        b1.setManufacturer("DOPK");
+        b1.setManufacturer("DOPSK");
         b1.setModel("MODELCYS");
-        b1.setSerialNumber("1242134");
+        b1.setSerialNumber("1242134" + Math.random());
         bikeService.saveBike(b1);
         bi.add(b1);
         station.setBikes(bi);
@@ -77,7 +77,7 @@ public class StationController {
         Location location = station.getLocation();
         location.setStation(newStation);
         locationService.saveLocaiton(location);
-        return "redirect:/admin/stations?created";
+        return "redirect:/admin/stations?created=true";
     }
 
     @RequestMapping(value = "/admin/stations/{id}/delete", method = RequestMethod.GET)

@@ -15,7 +15,8 @@ public class Station extends Persistent {
     private static final long serialVersionUID = 3402431765055829231L;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "station", cascade = CascadeType.ALL)
-    private Location location;
+    @JoinColumn(name="location_id")
+    private Location location = new Location();
 
     @Column(nullable = false)
     @Min(value = 1)

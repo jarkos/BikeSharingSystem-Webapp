@@ -12,10 +12,13 @@ function updateMarkerPosition(latLng) {
         latLng.lat(),
         latLng.lng()
     ].join(', ');
+    document.getElementById('inputLatitude').value = latLng.lat();
+    document.getElementById('inputLongitude').value = latLng.lng();
 }
 
 function updateMarkerAddress(str) {
     document.getElementById('address').innerHTML = str;
+    document.getElementById('inputLocationAddress').value = str;
 }
 
 function initialize() {

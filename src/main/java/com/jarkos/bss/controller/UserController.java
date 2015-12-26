@@ -48,7 +48,7 @@ public class UserController {
         }
 
         if (bindingResult.hasErrors()) {
-            return "users-create";
+            return "users-create?created=false";
         }
 
         user.setEnabled(true);

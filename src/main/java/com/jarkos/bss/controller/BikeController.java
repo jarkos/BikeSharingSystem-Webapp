@@ -50,7 +50,7 @@ public class BikeController {
         bike.setEnabled(true);
         bikeService.saveBike(bike);
 
-        return "redirect:/admin/bikes?created";
+        return "redirect:/admin/bikes?created=true";
     }
 
     @RequestMapping(value = "/admin/bikes/{id}/delete", method = RequestMethod.GET)

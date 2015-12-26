@@ -1,6 +1,7 @@
 package com.jarkos.bss.persistance.dao;
 
 import com.jarkos.bss.persistance.entity.Bike;
+import com.jarkos.bss.persistance.enums.BikeStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,5 +54,12 @@ public class BikeDao {
 
     public void delete(Bike bike) {
         entityManager.remove(entityManager.contains(bike) ? bike : entityManager.merge(bike));
+    }
+
+    public List<Bike> findAllNewBikes() {
+        TypedQuery<Bike> query = entityManager.createQuery("SELECT b FROM Bike AS b WHERE b.bike_status=:bike_status", Bike.class);
+        query.setParameter("bike_status", BikeStatus.NEW.name());
+
+        return query.getResultList();
     }
 }

@@ -33,6 +33,7 @@
                 <th>Producent</th>
                 <th>Model</th>
                 <th>Numer seryjny</th>
+                <th>Status</th>
                 <th>Data utworzenia</th>
                 <th>Data aktualizacji</th>
             </tr>
@@ -43,6 +44,7 @@
                 <td th:text="${bike.manufacturer}">Admin</td>
                 <td th:text="${bike.model}">admin@oneous.com</td>
                 <td th:text="${bike.serialNumber}">admin@oneous.com</td>
+                <td th:text="${bike.bikeStatus}">Status</td>
                 <td th:text="${bike.created}">25/10/2014</td>
                 <td th:text="${bike.updated}">25/10/2014</td>
                 <td><a href="editBike" th:href="@{/admin/bikes/{id}/edit/(id=${bike.id})}">edytuj</a></td>

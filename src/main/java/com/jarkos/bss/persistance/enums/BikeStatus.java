@@ -1,4 +1,4 @@
-package com.jarkos.bss.persistance.entity;
+package com.jarkos.bss.persistance.enums;
 
 /**
  * Created by Jarek on 2015-12-26.

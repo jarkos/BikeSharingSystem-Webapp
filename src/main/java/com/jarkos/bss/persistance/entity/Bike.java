@@ -1,5 +1,6 @@
 package com.jarkos.bss.persistance.entity;
 
+import com.jarkos.bss.persistance.enums.BikeStatus;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;

@@ -6,17 +6,19 @@
 
 <head>
     <title>Edycja rowerów</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 </head>
 
 <body th:with="page='users'">
 
 <div layout:fragment="content">
 
-    <form class="form-horizontal" role="form" action="#" th:action="@{/admin/bikes/{id}/edit/(id=${bike.id})}" th:object="${bike}"
+    <form class="form-horizontal" role="form" action="#" th:action="@{/admin/bikes/{id}/edit/(id=${bike.id})}"
+          th:object="${bike}"
           method="post">
         <div class="form-group" th:class="${#fields.hasErrors('manufacturer')}? 'form-group has-error' : 'form-group'">
-            <label for="inputManufacture" class="col-sm-2 control-label" th:text="#{label.manufacturer}">Manufacturer</label>
+            <label for="inputManufacture" class="col-sm-2 control-label"
+                   th:text="#{label.manufacturer}">Manufacturer</label>
 
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="inputManufacture" th:field="*{manufacturer}"
@@ -33,11 +35,28 @@
             </div>
         </div>
         <div class="form-group" th:class="${#fields.hasErrors('serialNumber')}? 'form-group has-error' : 'form-group'">
-            <label for="inputSerialNumber" class="col-sm-2 control-label" th:text="#{label.serialNumber}">SerialNumber</label>
+            <label for="inputSerialNumber" class="col-sm-2 control-label"
+                   th:text="#{label.serialNumber}">SerialNumber</label>
 
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputSerialNumber" th:field="*{serialNumber}" placeholder="SerialNumber"/>
+                <input type="text" class="form-control" id="inputSerialNumber" th:field="*{serialNumber}"
+                       placeholder="SerialNumber"/>
                 <label class="control-label" for="inputModel" th:errors="*{serialNumber}">Error!</label>
+            </div>
+        </div>
+
+        <div class="form-group" th:class="${#fields.hasErrors('bikeStatus')}? 'form-group has-error' : 'form-group'">
+            <label for="bikeStatus" class="col-sm-2 control-label">Status</label>
+
+            <div class="col-sm-10">
+                <div class="form-control" style="border: none">
+                    <label class="checkbox-inline"
+                           th:each="bikeStatus : ${T(com.jarkos.bss.persistance.enums.BikeStatus).values()}">
+                        <input type="radio" id="bikeStatus" th:field="*{bikeStatus}" th:value="${bikeStatus}"/>
+                        <span th:text="${bikeStatus.name()}"/>
+                    </label>
+                </div>
+                <label class="control-label" for="bikeStatus" th:errors="*{bikeStatus}">Error!</label>
             </div>
         </div>
 

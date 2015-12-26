@@ -81,4 +81,9 @@ public class BikeController {
         bikeService.updateBike(bike);
         return "redirect:/admin/bikes?edited=true";
     }
+
+    @RequestMapping(value = "/admin/test", method = RequestMethod.GET)
+    public String test(Model model) {
+        return "test";
+    }
 }

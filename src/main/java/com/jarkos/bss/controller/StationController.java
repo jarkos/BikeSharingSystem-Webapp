@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -79,4 +80,18 @@ public class StationController {
         return "redirect:/admin/stations?created";
     }
 
+    @RequestMapping(value = "/admin/stations/{id}/delete", method = RequestMethod.GET)
+    public String deleteStationForm(@PathVariable int id) {
+        if (id != 0) {
+            Station stationToDelete = stationService.findStationById(id);
+            if (stationToDelete != null) {
+                stationService.deleteStation(stationToDelete);
+            } else {
+                log.debug("deleteStation, id={}", id);
+                System.out.printf("ERROR. Nie ma stacji o takim ID: " + id);
+            }
+            return "redirect:/admin/stations?deleted=true";
+        }
+        return "redirect:/admin/stations?deleted=false";
+    }
 }

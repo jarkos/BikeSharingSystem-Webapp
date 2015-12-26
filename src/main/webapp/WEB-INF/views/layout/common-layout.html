@@ -14,7 +14,8 @@
     <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
+    <script src="../../../resources/libs/jquery-1.11.1.js" th:src="@{/resources/libs/jquery-1.11.1.js}"></script>
+    <script src="../../../resources/libs/jquery-1.11.1.min.js" th:src="@{/resources/libs/jquery-1.11.1.min.js}"></script>
     <!-- Styles for this template -->
     <link rel="stylesheet" type="text/css" media="all" href="../../../resources/css/dashboard.css"
           th:href="@{/resources/css/dashboard.css}"/>
@@ -79,8 +80,8 @@
             </ul>
 
             <ul sec:authorize="hasRole('ROLE_ADMIN')" class="nav nav-sidebar">
-                <li th:classappend="${page == 'history' ? 'active' : ''}">
-                    <a href="#" th:href="@{/admin/bikes}">Historia</a>
+                <li th:classappend="${page == 'test' ? 'active' : ''}">
+                    <a href="#" th:href="@{/admin/test}">Test</a>
                 </li>
             </ul>
 

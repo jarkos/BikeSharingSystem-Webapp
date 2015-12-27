@@ -34,7 +34,6 @@ public class BikeService {
 
     public void saveNewBike(Bike bike) {
         bike.setEnabled(true);
-        bike.setBikeStatus(BikeStatus.NEW);
         bikeDao.save(bike);
     }
 

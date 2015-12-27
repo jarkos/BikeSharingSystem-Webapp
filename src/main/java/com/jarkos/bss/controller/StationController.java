@@ -3,6 +3,7 @@ package com.jarkos.bss.controller;
 import com.jarkos.bss.persistance.entity.Bike;
 import com.jarkos.bss.persistance.entity.Location;
 import com.jarkos.bss.persistance.entity.Station;
+import com.jarkos.bss.persistance.enums.BikeStatus;
 import com.jarkos.bss.service.BikeService;
 import com.jarkos.bss.service.LocationService;
 import com.jarkos.bss.service.StationService;
@@ -66,6 +67,7 @@ public class StationController {
         //mock
         Set<Bike> bi = new HashSet<Bike>();
         Bike b1 = new Bike();
+        b1.setBikeStatus(BikeStatus.TO_BORROW);
         b1.setManufacturer("DOPSK");
         b1.setModel("MODELCYS");
         b1.setSerialNumber("1242134" + Math.random());
@@ -104,6 +106,7 @@ public class StationController {
         Station station = stationService.findStationById(id);
         model.addAttribute("station", station);
         model.addAttribute("bikes", station.getBikes());
+        model.addAttribute("availableBikes", bikeService.findAllAvailableBikes());
         return "stations-edit";
     }
 

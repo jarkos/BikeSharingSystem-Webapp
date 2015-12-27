@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Jarek on 2015-12-15.
@@ -65,16 +63,6 @@ public class StationController {
         if (bindingResult.hasErrors()) {
             return "stations?create=false";
         }
-        //mock
-//        Set<Bike> bi = new HashSet<Bike>();
-//        Bike b1 = new Bike();
-//        b1.setBikeStatus(BikeStatus.TO_BORROW);
-//        b1.setManufacturer("DOPSK");
-//        b1.setModel("MODELCYS");
-//        b1.setSerialNumber("1242134" + Math.random());
-//        bikeService.saveNewBike(b1);
-//        bi.add(b1);
-//        station.setBikes(bi);
         station.setTakenSpaces(0);
         Station newStation = stationService.saveStation(station);
         Location location = station.getLocation();

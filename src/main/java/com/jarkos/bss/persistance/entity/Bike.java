@@ -4,6 +4,10 @@ import com.jarkos.bss.persistance.enums.BikeStatus;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Jarek on 2015-12-01.
@@ -36,6 +40,9 @@ public class Bike extends Persistent {
     @ManyToOne
     @JoinColumn(name="station_id", nullable=true)
     private Station station;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bike", fetch = FetchType.EAGER)
+    private List<Note> notes = new ArrayList<>();
 
     public String getManufacturer() {
         return manufacturer;
@@ -83,5 +90,13 @@ public class Bike extends Persistent {
 
     public void setStation(Station station) {
         this.station = station;
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
     }
 }

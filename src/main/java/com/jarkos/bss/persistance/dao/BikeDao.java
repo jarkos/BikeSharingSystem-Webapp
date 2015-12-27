@@ -29,9 +29,6 @@ public class BikeDao {
     }
 
     public List<Bike> findAllBikes() {
-        List<Bike> bikes = entityManager.createQuery("FROM Bike", Bike.class).getResultList();
-        TypedQuery<Bike> query = entityManager.createQuery("FROM Bike", Bike.class);
-        Bike b = getSingleResultOrNull(query);
         return entityManager.createQuery("SELECT b FROM Bike AS b", Bike.class).getResultList();
     }
 

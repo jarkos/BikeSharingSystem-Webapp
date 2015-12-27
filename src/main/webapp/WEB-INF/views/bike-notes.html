@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/common-layout">
+<head>
+    <title>Profil stacji</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+</head>
+<body th:with="page='stations'">
+<div layout:fragment="content">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tbody>
+            <div th:object="${bike}">
+                <td style="font-size: 28px" th:text="'ID: ' + ${bike.id}">3</td>
+                <td style="font-size: 28px" th:text="'SN: ' + ${bike.serialNumber}"></td>
+                <td style="font-size: 28px" th:text="'Status: ' + ${bike.bikeStatus}"></td>
+                <div id="infoStation" th:if="${(bike.station != null) }">
+                    <td style="font-size: 28px" th:text="'Stacja: ' + ${bike.station.location.locationAddress}"></td>
+                </div>
+            </div>
+            </tbody>
+        </table>
+    </div>
+    <h3>Notatki</h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nr</th>
+                <th>Opis</th>
+                <th>Data utworzenia</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="bike, bikeStat : ${bikes}">
+                <td th:text="${bikeStat.count}">1</td>
+                <td th:text="${notes.description}">1</td>
+                <td th:text="${notes.created}">1</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

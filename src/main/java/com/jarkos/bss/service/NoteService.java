@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * Created by Jarek on 2015-12-27.
  */
-@Transactional
 @Service
+@Transactional
 public class NoteService {
 
     @Autowired

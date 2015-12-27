@@ -16,7 +16,7 @@ public class Note extends Persistent{
     private String description;
 
     @ManyToOne
-    @JoinColumn(name="bike_id", nullable=false)
+    @JoinColumn(name="bike_id", nullable=true)
     private Bike bike;
 
 

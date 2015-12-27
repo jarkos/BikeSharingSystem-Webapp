@@ -36,6 +36,9 @@
                 <th>Status</th>
                 <th>Data utworzenia</th>
                 <th>Data aktualizacji</th>
+                <th>Notatki</th>
+                <th>Edytuj</th>
+                <th>Usuń</th>
             </tr>
             </thead>
             <tbody>
@@ -47,6 +50,7 @@
                 <td th:text="${bike.bikeStatus}">Status</td>
                 <td th:text="${bike.created}">25/10/2014</td>
                 <td th:text="${bike.updated}">25/10/2014</td>
+                <td><a href="editBike" th:href="@{/admin/bikes/{id}/notes(id=${bike.id})}">notatki</a></td>
                 <td><a href="editBike" th:href="@{/admin/bikes/{id}/edit/(id=${bike.id})}">edytuj</a></td>
                 <td><a href="deleteBike" th:href="@{/admin/bikes/{id}/delete/(id=${bike.id})}">usuń</a></td>
             </tr>

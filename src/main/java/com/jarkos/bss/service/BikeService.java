@@ -24,11 +24,11 @@ public class BikeService {
         return bikeDao.findBikeById(id);
     }
 
-    public List<Bike> findAllBikes(){
+    public List<Bike> findAllBikes() {
         return bikeDao.findAllBikes();
     }
 
-    public List<Bike> findAllNewBikes(){
+    public List<Bike> findAllNewBikes() {
         return bikeDao.findAllNewBikes();
     }
 

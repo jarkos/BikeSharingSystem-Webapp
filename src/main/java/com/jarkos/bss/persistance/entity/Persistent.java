@@ -19,8 +19,8 @@ public abstract class Persistent implements Serializable {
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date updated;
 
-    @Version
-    private int version;
+//    @Version
+//    private int version;
 
     @PrePersist
     protected void onCreate() {
@@ -56,13 +56,13 @@ public abstract class Persistent implements Serializable {
         updated = d;
     }
 
-    public int getVersion() {
-        return version;
-    }
+//    public int getVersion() {
+//        return version;
+//    }
 
-    public void setVersion(int version) {
-        this.version = version;
-    }
+//    public void setVersion(int version) {
+//        this.version = version;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -71,7 +71,7 @@ public abstract class Persistent implements Serializable {
 
         Persistent that = (Persistent) o;
 
-        if (version != that.version) return false;
+//        if (version != that.version) return false;
         if (created != null ? !created.equals(that.getCreated()) : that.getCreated() != null) return false;
         if (id != null ? !id.equals(that.id) : that.getId() != null) return false;
         if (updated != null ? !updated.equals(that.getUpdated()) : that.getUpdated() != null) return false;
@@ -84,7 +84,7 @@ public abstract class Persistent implements Serializable {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (created != null ? created.hashCode() : 0);
         result = 31 * result + (updated != null ? updated.hashCode() : 0);
-        result = 31 * result + version;
+//        result = 31 * result + version;
         return result;
     }
 }

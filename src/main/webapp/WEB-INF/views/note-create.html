@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/common-layout">
+
+<head>
+    <title>Dodanie nowej notatki do roweru</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+</head>
+
+<body th:with="page='bikes'">
+
+<div layout:fragment="content">
+
+    <form class="form-horizontal" role="form" action="#" th:action="@{/admin/bikes/{id}/notes/create/ (id=${bike.id})}" th:object="${note}"
+          method="post">
+        <div class="form-group" th:class="${#fields.hasErrors('description')}? 'form-group has-error' : 'form-group'">
+            <label for="inputDescription" class="col-sm-2 control-label" th:text="#{label.description}">Opis</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputDescription" th:field="*{description}"
+                       placeholder="Opis"/>
+                <label class="control-label" for="inputDescription" th:errors="*{description}">Error!</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Dodaj</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+</body>
+</html>

@@ -23,6 +23,7 @@
             </tbody>
         </table>
     </div>
+    <a href="#" th:href="@{/admin/bikes/{id}/notes/create/ (id=${bike.id})}" class="btn btn-primary btn-lg active" role="button">Dodaj notatke</a>
     <h3>Notatki</h3>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -31,13 +32,15 @@
                 <th>Nr</th>
                 <th>Opis</th>
                 <th>Data utworzenia</th>
+                <th>Usuń</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="bike, bikeStat : ${bikes}">
-                <td th:text="${bikeStat.count}">1</td>
-                <td th:text="${notes.description}">1</td>
-                <td th:text="${notes.created}">1</td>
+            <tr th:each="note, noteStat : ${notes}">
+                <td th:text="${noteStat.count}">1</td>
+                <td th:text="${note.description}">1</td>
+                <td th:text="${note.created}">1</td>
+                <td th:text="${note.created}">1</td>
             </tr>
             </tbody>
         </table>

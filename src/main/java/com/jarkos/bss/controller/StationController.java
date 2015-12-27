@@ -128,7 +128,6 @@ public class StationController {
         bikeToAdd.setBikeStatus(BikeStatus.CHANGING_STATION);
         bikeToAdd.setStation(station);
         station.getBikes().add(bikeToAdd);
-        //bikeService.updateBike(bikeToAdd);
         stationService.updateStation(station);
         model.addAttribute("id", stationId);
         return "redirect:/admin/stations/{id}/edit?created=true";

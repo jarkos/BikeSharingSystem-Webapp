@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 public class Note extends Persistent{
 
     private static final long serialVersionUID = -7388516679639096802L;
+
     @NotNull
     private String description;
 

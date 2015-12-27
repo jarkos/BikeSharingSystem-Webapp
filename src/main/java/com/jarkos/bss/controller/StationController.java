@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -65,15 +66,15 @@ public class StationController {
             return "stations?create=false";
         }
         //mock
-        Set<Bike> bi = new HashSet<Bike>();
-        Bike b1 = new Bike();
-        b1.setBikeStatus(BikeStatus.TO_BORROW);
-        b1.setManufacturer("DOPSK");
-        b1.setModel("MODELCYS");
-        b1.setSerialNumber("1242134" + Math.random());
-        bikeService.saveNewBike(b1);
-        bi.add(b1);
-        station.setBikes(bi);
+//        Set<Bike> bi = new HashSet<Bike>();
+//        Bike b1 = new Bike();
+//        b1.setBikeStatus(BikeStatus.TO_BORROW);
+//        b1.setManufacturer("DOPSK");
+//        b1.setModel("MODELCYS");
+//        b1.setSerialNumber("1242134" + Math.random());
+//        bikeService.saveNewBike(b1);
+//        bi.add(b1);
+//        station.setBikes(bi);
         station.setTakenSpaces(0);
         Station newStation = stationService.saveStation(station);
         Location location = station.getLocation();
@@ -106,8 +107,14 @@ public class StationController {
         Station station = stationService.findStationById(id);
         model.addAttribute("station", station);
         model.addAttribute("bikes", station.getBikes());
-        model.addAttribute("availableBikes", bikeService.findAllAvailableBikes());
+        model.addAttribute("availableBikes", getAvailableBikesFromOtherPlaces
+                (station, bikeService.findAllAvailableBikes()));
         return "stations-edit";
+    }
+
+    private List<Bike> getAvailableBikesFromOtherPlaces(Station station, List<Bike> allAvailableBikes) {
+        station.getBikes().stream().filter(bike -> allAvailableBikes.contains(bike)).forEach(allAvailableBikes::remove);
+        return allAvailableBikes;
     }
 
     @RequestMapping(value = "/admin/stations/{id}/edit", method = RequestMethod.POST)
@@ -123,6 +130,20 @@ public class StationController {
         model.addAttribute("station", station);
         model.addAttribute("bikes", station.getBikes());
         return "stations-profile";
+    }
+
+    @RequestMapping(value = "/admin/stations/{stationId}/edit/bikes/{bikeId}/addBike", method = RequestMethod.GET)
+    public String addBikeToStation(@PathVariable int stationId, @PathVariable int bikeId, Model model) {
+        log.debug("addBikeToStation, stationId={}", stationId);
+        Station station = stationService.findStationById(stationId);
+        Bike bikeToAdd = bikeService.findBikeById(bikeId);
+        bikeToAdd.setBikeStatus(BikeStatus.CHANGING_STATION);
+        bikeToAdd.setStation(station);
+        station.getBikes().add(bikeToAdd);
+        //bikeService.updateBike(bikeToAdd);
+        stationService.updateStation(station);
+        model.addAttribute("id", stationId);
+        return "redirect:/admin/stations/{id}/edit?created=true";
     }
 
 }

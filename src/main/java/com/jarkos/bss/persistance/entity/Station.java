@@ -15,7 +15,7 @@ public class Station extends Persistent {
     private static final long serialVersionUID = 3402431765055829231L;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "station", cascade = CascadeType.ALL)
-    @JoinColumn(name="location_id")
+    @JoinColumn(name = "location_id")
     private Location location = new Location();
 
     @Column(nullable = false)
@@ -25,8 +25,9 @@ public class Station extends Persistent {
     @Column
     private int takenSpaces;
 
-    @Column(name = "listOfBikes", nullable = true)
-    @ElementCollection(targetClass = Bike.class, fetch = FetchType.EAGER)
+    //    @Column(name = "listOfBikes", nullable = true)
+//    @ElementCollection(targetClass = Bike.class, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "station", fetch = FetchType.EAGER)
     private Set<Bike> bikes = new HashSet<>();
 
     public int getSpaceNumber() {
@@ -38,7 +39,12 @@ public class Station extends Persistent {
     }
 
     public int getTakenSpaces() {
-        return bikes.size();
+        if (bikes.size() > 0) {
+            return bikes.size();
+        }
+        else {
+            return 0;
+        }
     }
 
     public void setTakenSpaces(int takenSpaces) {
@@ -50,8 +56,8 @@ public class Station extends Persistent {
     }
 
     public void setBikes(Set<Bike> bikes) throws Exception {
-        if(bikes.size()>(getSpaceNumber()-getTakenSpaces())) {
-         throw new Exception("To many bikes for station!");
+        if (bikes.size() > (getSpaceNumber() - getTakenSpaces())) {
+            throw new Exception("To many bikes for station!");
         }
         this.bikes = bikes;
     }

@@ -1,6 +1,7 @@
 package com.jarkos.bss.controller;
 
 import com.jarkos.bss.persistance.entity.Bike;
+import com.jarkos.bss.persistance.enums.BikeStatus;
 import com.jarkos.bss.service.BikeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,7 @@ public class BikeController {
         if (bindingResult.hasErrors()) {
             return "bikes-create";
         }
+        bike.setBikeStatus(BikeStatus.NEW);
         bikeService.saveNewBike(bike);
 
         return "redirect:/admin/bikes?created=true";

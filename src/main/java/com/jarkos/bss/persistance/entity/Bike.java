@@ -33,6 +33,10 @@ public class Bike extends Persistent {
     @Column(nullable = false)
     private boolean enabled;
 
+    @ManyToOne
+    @JoinColumn(name="station_id", nullable=true)
+    private Station station;
+
     public String getManufacturer() {
         return manufacturer;
     }
@@ -71,5 +75,13 @@ public class Bike extends Persistent {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Station getStation() {
+        return station;
+    }
+
+    public void setStation(Station station) {
+        this.station = station;
     }
 }

@@ -29,7 +29,19 @@
 <body th:with="page='stations'">
 <div layout:fragment="content">
 
-    <form class="form-horizontal" role="form" action="#" th:action="@{/admin/stations/create}" th:object="${station}"
+    <div id="infoDeleted" th:if="${(param.deleted != null) and (param.deleted[0] == 'true')}">
+        <div class="alert alert-info" role="alert">Usunięto rower!</div>
+    </div>
+
+    <div id="infoCreated" th:if="${(param.created != null) and (param.created[0] == 'true')}">
+        <div class="alert alert-info" role="alert">Dodano rower!</div>
+    </div>
+
+    <div id="infoEdited" th:if="${(param.edited != null) and (param.edited[0] == 'true')}">
+        <div class="alert alert-info" role="alert">Zapisano edycje stacji!</div>
+    </div>
+
+    <form class="form-horizontal" role="form" action="#" th:action="@{/admin/stations/{id}/edit/ (id=${station.id})}" th:object="${station}"
           method="post">
         <div class="form-group" th:class="${#fields.hasErrors('spaceNumber')}? 'form-group has-error' : 'form-group'">
             <label for="inputSpaceNumber" class="col-sm-2 control-label"
@@ -142,7 +154,7 @@
                                 <td th:text="${bike.bikeStatus}">Status</td>
                                 <td th:text="${bike.created}">25/10/2014</td>
                                 <td th:text="${bike.updated}">25/10/2014</td>
-                                <td><a href="editBike" th:href="@{/admin/bikes/{id}/edit/(id=${bike.id})}">Dodaj do stacji</a></td>
+                                <td><a href="editBike" th:href="@{/admin/stations/{id}/edit/bikes/{bikeId}/addBike/(id=${station.id}, bikeId=${bike.id})}">Dodaj do stacji</a></td>
                             </tr>
                             </tbody>
                         </table>

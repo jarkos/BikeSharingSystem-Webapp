@@ -53,17 +53,22 @@ public class NoteController {
         Note newNote = new Note();
         newNote.setBike(bike);
         newNote.setDescription(note.getDescription());
-        bike.getNotes().add( noteService.saveNewNote(newNote));
+        bike.getNotes().add(noteService.saveNewNote(newNote));
         bikeService.updateBike(bike);
         model.addAttribute("id", bikeId);
         return "redirect:/admin/bikes/{id}/notes?edited=true";
     }
 
     @RequestMapping(value = "/admin/bikes/{bikeId}/notes/{noteId}/delete", method = RequestMethod.GET)
-    public String deleteNoteForm(@PathVariable int bikeId, @PathVariable int noteId) {
-        if (noteId != 0 && bikeId !=0) {
+    public String deleteNoteForm(@PathVariable int bikeId, @PathVariable int noteId, Model model) {
+        model.addAttribute("id", bikeId);
+        if (noteId != 0 && bikeId != 0) {
             Note noteToDelete = noteService.findNoteById(noteId);
+            noteToDelete.setBike(null);
             if (noteToDelete != null) {
+                Bike bike = bikeService.findBikeById(bikeId);
+                bike.getNotes().remove(noteToDelete);
+                bikeService.updateBike(bike);
                 noteService.deleteNote(noteToDelete);
             } else {
                 log.debug("deleteNote, id={}", noteId);

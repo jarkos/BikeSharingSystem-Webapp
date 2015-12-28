@@ -40,7 +40,7 @@
                 <td th:text="${noteStat.count}">1</td>
                 <td th:text="${note.description}">1</td>
                 <td th:text="${note.created}">1</td>
-                <td th:text="${note.created}">1</td>
+                <td><a href="deleteBikeNote" th:href="@{/admin/bikes/{bikeId}/notes/{noteId}/delete/(bikeId=${bike.id},noteId=${note.id})}">usuń</a></td>
             </tr>
             </tbody>
         </table>

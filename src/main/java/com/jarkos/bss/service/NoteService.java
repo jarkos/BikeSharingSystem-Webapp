@@ -23,8 +23,8 @@ public class NoteService {
         return noteDao.findNoteById(id);
     }
 
-    public void saveNewNote(Note note) {
-        noteDao.save(note);
+    public Note saveNewNote(Note note) {
+        return noteDao.save(note);
     }
 
     public void deleteNote(Note note) {

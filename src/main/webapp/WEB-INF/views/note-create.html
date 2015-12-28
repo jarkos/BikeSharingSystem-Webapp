@@ -13,7 +13,7 @@
 
 <div layout:fragment="content">
 
-    <form class="form-horizontal" role="form" action="#" th:action="@{/admin/bikes/{id}/notes/create/ (id=${bike.id})}" th:object="${note}"
+    <form class="form-horizontal" role="form" action="#" th:action="@{/admin/bikes/{bikeId}/notes/create/ (bikeId=${bike.id})}" th:object="${note}"
           method="post">
         <div class="form-group" th:class="${#fields.hasErrors('description')}? 'form-group has-error' : 'form-group'">
             <label for="inputDescription" class="col-sm-2 control-label" th:text="#{label.description}">Opis</label>

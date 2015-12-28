@@ -46,15 +46,17 @@ public class NoteController {
         return "note-create";
     }
 
-    @RequestMapping(value = "/admin/bikes/{id}/notes/create", method = RequestMethod.POST)
-    public String addNote(@Valid Note note, @PathVariable int id) {
-        log.debug("editBike, id={}", id);
-        Bike bike = bikeService.findBikeById(id);
-        bike.getNotes().add(note);
+    @RequestMapping(value = "/admin/bikes/{bikeId}/notes/create", method = RequestMethod.POST)
+    public String addNote(@Valid Note note, @PathVariable int bikeId, Model model) {
+        log.debug("addNote, bikeid={}", bikeId);
+        Bike bike = bikeService.findBikeById(bikeId);
+        Note newNote = new Note();
+        newNote.setBike(bike);
+        newNote.setDescription(note.getDescription());
+        bike.getNotes().add( noteService.saveNewNote(newNote));
         bikeService.updateBike(bike);
-        note.setBike(bike);
-        noteService.updateNote(note);
-        return "redirect:/admin/bikes?edited=true";
+        model.addAttribute("id", bikeId);
+        return "redirect:/admin/bikes/{id}/notes?edited=true";
     }
 
     @RequestMapping(value = "/admin/bikes/{bikeId}/notes/{noteId}/delete", method = RequestMethod.GET)

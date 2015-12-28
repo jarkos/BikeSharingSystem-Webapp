@@ -20,7 +20,6 @@ public class Note extends Persistent{
     @JoinColumn(name="bike_id", nullable=true)
     private Bike bike;
 
-
     public Bike getBike() {
         return bike;
     }
@@ -35,6 +34,27 @@ public class Note extends Persistent{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Note)) return false;
+        if (!super.equals(o)) return false;
+
+        Note note = (Note) o;
+
+        if (description != null ? !description.equals(note.description) : note.description != null) return false;
+        return !(bike != null ? !bike.equals(note.bike) : note.bike != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (bike != null ? bike.hashCode() : 0);
+        return result;
     }
 
 }

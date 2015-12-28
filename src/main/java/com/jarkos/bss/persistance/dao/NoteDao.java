@@ -21,8 +21,10 @@ public class NoteDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void save(Note note) {
+    public Note save(Note note) {
         entityManager.persist(note);
+        entityManager.flush();
+        return note;
     }
 
     public void update(Note note) {

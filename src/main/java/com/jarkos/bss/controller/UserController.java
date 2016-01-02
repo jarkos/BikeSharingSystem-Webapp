@@ -48,9 +48,9 @@ public class UserController {
         }
 
         if (bindingResult.hasErrors()) {
-            return "users-create?created=false";
+            return "redirect:/admin/users?created=false";
         }
-
+        user.setAccountBalance(0);
         user.setEnabled(true);
         userService.saveUser(user);
 

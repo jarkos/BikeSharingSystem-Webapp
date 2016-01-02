@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.Collection;
+import java.util.Set;
 
 @Entity
 public class User extends Persistent implements UserDetails {
@@ -36,7 +36,14 @@ public class User extends Persistent implements UserDetails {
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role", nullable = false)
-    private Collection<Role> roles;
+    private Set<Role> roles;
+
+    @Column(name="account_balance", nullable = false)
+    public Integer accountBalance;
+
+    @OneToOne
+    @JoinColumn(name = "bike_id")
+    private Bike borrowedBike;
 
     public void setUsername(String username) {
         this.username = username;
@@ -66,17 +73,17 @@ public class User extends Persistent implements UserDetails {
         this.locked = locked;
     }
 
-    public Collection<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
-//   Spring Security methods
+    //   Spring Security methods
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Set<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
     }
 
@@ -108,6 +115,22 @@ public class User extends Persistent implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return true; //Not implemented
+    }
+
+    public Integer getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void setAccountBalance(Integer accountBalance) {
+        this.accountBalance = accountBalance;
+    }
+
+    public Bike getBorrowedBike() {
+        return borrowedBike;
+    }
+
+    public void setBorrowedBike(Bike borrowedBike) {
+        this.borrowedBike = borrowedBike;
     }
 
 }

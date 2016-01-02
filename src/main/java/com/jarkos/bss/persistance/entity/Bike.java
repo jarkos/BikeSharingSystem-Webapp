@@ -44,6 +44,9 @@ public class Bike extends Persistent {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bike", fetch = FetchType.EAGER)
     private List<Note> notes = new ArrayList<>();
 
+    @OneToOne(mappedBy="borrowedBike")
+    private User currentUser;
+
     public String getManufacturer() {
         return manufacturer;
     }
@@ -98,5 +101,13 @@ public class Bike extends Persistent {
 
     public void setNotes(List<Note> notes) {
         this.notes = notes;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 }

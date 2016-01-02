@@ -64,8 +64,8 @@ public class NoteController {
         model.addAttribute("id", bikeId);
         if (noteId != 0 && bikeId != 0) {
             Note noteToDelete = noteService.findNoteById(noteId);
-            noteToDelete.setBike(null);
             if (noteToDelete != null) {
+                noteToDelete.setBike(null);
                 Bike bike = bikeService.findBikeById(bikeId);
                 bike.getNotes().remove(noteToDelete);
                 bikeService.updateBike(bike);

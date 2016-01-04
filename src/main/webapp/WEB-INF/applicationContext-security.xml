@@ -27,13 +27,13 @@
         <security:access-denied-handler error-page="/access-denied"/>
 
         <security:intercept-url pattern="/login" access="permitAll"/>
-
+        <security:intercept-url pattern="/externalApi/**" access="permitAll"/>
         <security:intercept-url pattern="/logout" access="isAuthenticated()"/>
 
         <security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
 
-        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+        <!--<security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>-->
     </security:http>
 
     <security:authentication-manager alias="authenticationManager">

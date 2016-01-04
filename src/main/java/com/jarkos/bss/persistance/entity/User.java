@@ -39,7 +39,7 @@ public class User extends Persistent implements UserDetails {
     private Set<Role> roles;
 
     @Column(name="account_balance", nullable = false)
-    public Integer accountBalance;
+    private Integer accountBalance;
 
     @OneToOne
     @JoinColumn(name = "bike_id")

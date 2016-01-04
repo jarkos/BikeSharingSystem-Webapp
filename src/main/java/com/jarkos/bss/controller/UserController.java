@@ -52,6 +52,7 @@ public class UserController {
         }
         user.setAccountBalance(0);
         user.setEnabled(true);
+        user.setAccountBalance(20);
         userService.saveUser(user);
 
         return "redirect:/admin/users?created=true";

@@ -1,44 +1,55 @@
 package com.jarkos.bss.persistance.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by Jarek on 2016-01-02.
  */
 public class BorrowOperationDto implements Serializable{
 
-    private Long bike;
+    private Integer bikeId;
+    private Integer userId;
+    private Integer stationId;
 
-    public Long getBike() {
-        return bike;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm a z")
+    private Date borrowDate;
+
+    public Date getBorrowDate() {
+        return borrowDate;
     }
 
-    public void setBike(Long bike) {
-        this.bike = bike;
+    public void setBorrowDate(Date borrowDate) {
+        this.borrowDate = borrowDate;
     }
 
-    public BorrowOperationDto(Long bike) {
-        this.bike = bike;
+    public Integer getStationId() {
+        return stationId;
+    }
+
+    public void setStationId(Integer stationId) {
+        this.stationId = stationId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getBikeId() {
+        return bikeId;
+    }
+
+    public void setBikeId(Integer bikeId) {
+        this.bikeId = bikeId;
     }
 
     public BorrowOperationDto() {
 
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BorrowOperationDto)) return false;
-
-        BorrowOperationDto that = (BorrowOperationDto) o;
-
-        if (bike != null ? !bike.equals(that.bike) : that.bike != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return bike != null ? bike.hashCode() : 0;
     }
 }

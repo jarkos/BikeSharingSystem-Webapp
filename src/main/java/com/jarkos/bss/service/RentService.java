@@ -31,18 +31,18 @@ public class RentService {
 
     @Transactional(rollbackFor = Exception.class)
     public void borrowBike(BorrowOperationDto borrowOperationDto) throws NotRequiredAccountBalanceException, CannotBorrowMoreBikesException {
-//        User user = userService.findUserById(Integer.getInteger(borrowOperationDto.getBikeId()));
-//        Bike bike = bikeService.findBikeById(Integer.getInteger(borrowOperationDto.getBikeId()));
-//        Station station = stationService.findStationById(Integer.getInteger(borrowOperationDto.getBikeId()));
-//        if (canBorrow(user)) {
-//            user.setAccountBalance(user.getAccountBalance() - MONEY_FOR_BIKE_BORROWING);
-//            bike.setBikeStatus(BikeStatus.BORROWED);
-//            bike.setStation(null);
-//            station.setTakenSpaces(station.getSpaceNumber() - 1);
-//            removeBikeFromStation(station, bike);
-//            user.setAccountBalance(user.getAccountBalance() - MONEY_FOR_BIKE_BORROWING);
-//            user.setBorrowedBike(bike);
-//        }
+        User user = userService.findUserById(borrowOperationDto.getUserId());
+        Bike bike = bikeService.findBikeById(borrowOperationDto.getBikeId());
+        Station station = stationService.findStationById(borrowOperationDto.getStationId());
+        if (canBorrow(user)) {
+            user.setAccountBalance(user.getAccountBalance() - MONEY_FOR_BIKE_BORROWING);
+            bike.setStation(null);
+            station.setTakenSpaces(station.getTakenSpaces() - 1);
+            removeBikeFromStation(station, bike);
+            bike.setBikeStatus(BikeStatus.BORROWED);
+            user.setAccountBalance(user.getAccountBalance() - MONEY_FOR_BIKE_BORROWING);
+            user.setBorrowedBike(bike);
+        }
     }
 
     private void removeBikeFromStation(Station station, Bike bike) {
@@ -51,7 +51,7 @@ public class RentService {
 
     private boolean canBorrow(User user) throws NotRequiredAccountBalanceException, CannotBorrowMoreBikesException {
 
-        if(user.isAccountNonExpired() && user.isLocked() && user.isEnabled()) {
+        if(user.isAccountNonExpired() && !user.isLocked() && user.isEnabled()) {
             if (user.getAccountBalance() >= 5){
                 return true;
             }

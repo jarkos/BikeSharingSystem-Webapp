@@ -36,4 +36,9 @@ public class ExternalApiController {
             e.printStackTrace();
         }
     }
+
+    @RequestMapping(value = "/externalApi/returnService", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void returnBike(@RequestBody BorrowOperationDto borrowBike) {
+        rentService.returnBike(borrowBike);
+    }
 }

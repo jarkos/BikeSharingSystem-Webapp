@@ -8,14 +8,14 @@ import java.util.Date;
 /**
  * Created by Jarek on 2016-01-02.
  */
-public class BorrowOperationDto implements Serializable{
+public class BorrowOperationDto implements Serializable {
 
-    private Integer bikeId;
-    private Integer userId;
-    private Integer stationId;
+    protected Integer bikeId;
+    protected Integer userId;
+    protected Integer stationId;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm a z")
-    private Date borrowDate;
+    protected Date borrowDate;
 
     public Date getBorrowDate() {
         return borrowDate;
@@ -23,6 +23,11 @@ public class BorrowOperationDto implements Serializable{
 
     public void setBorrowDate(Date borrowDate) {
         this.borrowDate = borrowDate;
+    }
+
+    public void setBorrowDate() {
+        Date date = new Date();
+        this.borrowDate = date;
     }
 
     public Integer getStationId() {

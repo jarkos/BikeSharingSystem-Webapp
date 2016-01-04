@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class RentService {
 
-    private static final int MONEY_FOR_BIKE_BORROWING =  5;
+    private static final int MONEY_FOR_BIKE_BORROWING = 5;
 
     @Autowired
     private BikeService bikeService;
@@ -42,6 +42,9 @@ public class RentService {
             bike.setBikeStatus(BikeStatus.BORROWED);
             user.setAccountBalance(user.getAccountBalance() - MONEY_FOR_BIKE_BORROWING);
             user.setBorrowedBike(bike);
+            userService.update(user);
+            bikeService.updateBike(bike);
+            stationService.updateStation(station);
         }
     }
 
@@ -51,18 +54,31 @@ public class RentService {
 
     private boolean canBorrow(User user) throws NotRequiredAccountBalanceException, CannotBorrowMoreBikesException {
 
-        if(user.isAccountNonExpired() && !user.isLocked() && user.isEnabled()) {
-            if (user.getAccountBalance() >= 5){
+        if (user.isAccountNonExpired() && !user.isLocked() && user.isEnabled()) {
+            if (user.getAccountBalance() >= 5) {
                 return true;
-            }
-            else if(user.getBorrowedBike() != null){
+            } else if (user.getBorrowedBike() != null) {
                 throw new CannotBorrowMoreBikesException();
-            }
-            else {
+            } else {
                 throw new NotRequiredAccountBalanceException();
             }
         }
         return false;
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public void returnBike(BorrowOperationDto borrowOperationDto) {
+        User user = userService.findUserById(borrowOperationDto.getUserId());
+        Bike bike = bikeService.findBikeById(borrowOperationDto.getBikeId());
+        Station station = stationService.findStationById(borrowOperationDto.getStationId());
+
+        bike.setBikeStatus(BikeStatus.TO_BORROW);
+        bike.setStation(station);
+        station.setTakenSpaces(station.getTakenSpaces() + 1);
+        station.getBikes().add(bike);
+        user.setBorrowedBike(null);
+        userService.update(user);
+        bikeService.updateBike(bike);
+        stationService.updateStation(station);
+    }
 }

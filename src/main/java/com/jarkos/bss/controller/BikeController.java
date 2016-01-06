@@ -48,6 +48,7 @@ public class BikeController {
         if (bindingResult.hasErrors()) {
             return "bikes-create";
         }
+        bike.setEnabled(true);
         bike.setBikeStatus(BikeStatus.NEW);
         bikeService.saveNewBike(bike);
 

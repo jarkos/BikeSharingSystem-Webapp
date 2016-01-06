@@ -1,6 +1,7 @@
 package com.jarkos.bss.service;
 
 import com.jarkos.bss.persistance.dto.BorrowOperationDto;
+import com.jarkos.bss.persistance.dto.ReturnOperationDto;
 import com.jarkos.bss.persistance.entity.Bike;
 import com.jarkos.bss.persistance.entity.Station;
 import com.jarkos.bss.persistance.entity.User;
@@ -67,10 +68,10 @@ public class RentService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void returnBike(BorrowOperationDto borrowOperationDto) {
-        User user = userService.findUserById(borrowOperationDto.getUserId());
-        Bike bike = bikeService.findBikeById(borrowOperationDto.getBikeId());
-        Station station = stationService.findStationById(borrowOperationDto.getStationId());
+    public void returnBike (ReturnOperationDto returnBike) {
+        User user = userService.findUserById(returnBike.getUserId());
+        Bike bike = bikeService.findBikeById(returnBike.getBikeId());
+        Station station = stationService.findStationById(returnBike.getStationId());
 
         bike.setBikeStatus(BikeStatus.TO_BORROW);
         bike.setStation(station);

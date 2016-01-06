@@ -7,9 +7,9 @@ import java.util.Date;
  */
 public class ReturnOperationDto extends BorrowOperationDto{
 
-    public void setBorrowDate(Date borrowDate) {
+    public void setOperationDate(Date operationDate) {
         Date date = new Date();
-        this.borrowDate = date;
+        this.operationDate = date;
     }
 
 }

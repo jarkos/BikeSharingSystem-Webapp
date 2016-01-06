@@ -1,9 +1,13 @@
 package com.jarkos.bss.controller;
 
 import com.jarkos.bss.persistance.dto.BorrowOperationDto;
+import com.jarkos.bss.persistance.dto.ReturnOperationDto;
 import com.jarkos.bss.persistance.exceptions.CannotBorrowMoreBikesException;
+import com.jarkos.bss.persistance.exceptions.NotEnoughtSpaceOnStationException;
 import com.jarkos.bss.persistance.exceptions.NotRequiredAccountBalanceException;
+import com.jarkos.bss.service.BikeTransferService;
 import com.jarkos.bss.service.RentService;
+import com.jarkos.bss.service.TransferBikesOperationDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,9 @@ public class ExternalApiController {
     @Autowired
     private RentService rentService;
 
+    @Autowired
+    private BikeTransferService bikeTransferService;
+
     @RequestMapping(value = "/externalApi/rentService", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void borrowBike(@RequestBody BorrowOperationDto borrowBike) {
         try {
@@ -38,7 +45,17 @@ public class ExternalApiController {
     }
 
     @RequestMapping(value = "/externalApi/returnService", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void returnBike(@RequestBody BorrowOperationDto borrowBike) {
-        rentService.returnBike(borrowBike);
+    public void returnBike(@RequestBody ReturnOperationDto returnBike) {
+        rentService.returnBike(returnBike);
+    }
+
+    @RequestMapping(value = "/externalApi/transferFromService", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void transferBikesFromStation(@RequestBody TransferBikesOperationDto transferBikes) {
+        bikeTransferService.transferBikesFormStation(transferBikes);
+    }
+
+    @RequestMapping(value = "/externalApi/transferToService", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void transferBikesToStation(@RequestBody TransferBikesOperationDto transferBikes) throws NotEnoughtSpaceOnStationException {
+        bikeTransferService.transferBikesToStation(transferBikes);
     }
 }

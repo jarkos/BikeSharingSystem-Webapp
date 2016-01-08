@@ -8,15 +8,6 @@ import java.io.Serializable;
 public class BorrowOperationDto extends BaseBikeOperationDto implements Serializable {
 
     protected Integer bikeId;
-    protected Integer userId;
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     public Integer getBikeId() {
         return bikeId;

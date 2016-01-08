@@ -38,7 +38,7 @@ public class User extends Persistent implements UserDetails {
     @Column(name = "role", nullable = false)
     private Set<Role> roles;
 
-    @Column(name="account_balance", nullable = false)
+    @Column(name="account_balance", nullable = false, columnDefinition = "int default 0")
     private Integer accountBalance;
 
     @OneToOne

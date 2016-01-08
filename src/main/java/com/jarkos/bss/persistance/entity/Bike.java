@@ -37,7 +37,7 @@ public class Bike extends Persistent {
     @Column(nullable = false)
     private boolean enabled;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="station_id", nullable=true)
     private Station station;
 

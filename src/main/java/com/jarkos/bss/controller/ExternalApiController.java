@@ -5,9 +5,9 @@ import com.jarkos.bss.persistance.dto.ReturnOperationDto;
 import com.jarkos.bss.persistance.exceptions.CannotBorrowMoreBikesException;
 import com.jarkos.bss.persistance.exceptions.NotEnoughtSpaceOnStationException;
 import com.jarkos.bss.persistance.exceptions.NotRequiredAccountBalanceException;
-import com.jarkos.bss.service.BikeTransferService;
+import com.jarkos.bss.service.TransferService;
 import com.jarkos.bss.service.RentService;
-import com.jarkos.bss.service.TransferBikesOperationDto;
+import com.jarkos.bss.persistance.dto.TransferBikesOperationDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class ExternalApiController {
     private RentService rentService;
 
     @Autowired
-    private BikeTransferService bikeTransferService;
+    private TransferService transferService;
 
     @RequestMapping(value = "/externalApi/rentService", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void borrowBike(@RequestBody BorrowOperationDto borrowBike) {
@@ -51,11 +51,11 @@ public class ExternalApiController {
 
     @RequestMapping(value = "/externalApi/transferFromService", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void transferBikesFromStation(@RequestBody TransferBikesOperationDto transferBikes) {
-        bikeTransferService.transferBikesFormStation(transferBikes);
+        transferService.transferBikesFormStation(transferBikes);
     }
 
     @RequestMapping(value = "/externalApi/transferToService", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void transferBikesToStation(@RequestBody TransferBikesOperationDto transferBikes) throws NotEnoughtSpaceOnStationException {
-        bikeTransferService.transferBikesToStation(transferBikes);
+        transferService.transferBikesToStation(transferBikes);
     }
 }

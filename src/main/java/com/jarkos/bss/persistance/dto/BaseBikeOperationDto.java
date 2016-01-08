@@ -13,6 +13,16 @@ public class BaseBikeOperationDto {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm a z")
     protected Date operationDate;
 
+    protected Integer userId;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
     public BaseBikeOperationDto() {
     }
 

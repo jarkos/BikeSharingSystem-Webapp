@@ -1,4 +1,4 @@
-package com.jarkos.bss.service;
+package com.jarkos.bss.persistance.dto;
 
 import com.jarkos.bss.persistance.dto.BaseBikeOperationDto;
 

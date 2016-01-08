@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by Jarek on 2015-12-27.
@@ -32,7 +33,8 @@ public class NoteController {
     public String getNotesListForBike(@PathVariable int id, Model model) {
         log.debug("getNotesListForBike");
         Bike b = bikeService.findBikeById(id);
-        model.addAttribute("notes", b.getNotes());
+        List<Note> notes =  noteService.findAllNotesForBike(b.getId());
+        model.addAttribute("notes", notes);
         model.addAttribute("bike", b);
         return "bike-notes";
     }

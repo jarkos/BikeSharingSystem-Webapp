@@ -57,7 +57,7 @@ public class NoteDao {
     }
 
     public List<Note> findAllNotesForBike(int bikeId) {
-        TypedQuery<Note> query = entityManager.createQuery("SELECT b FROM Note AS b WHERE b.bike_id=:bike_id", Note.class);
+        TypedQuery<Note> query = entityManager.createQuery("SELECT b FROM Note AS b WHERE b.bike.id=:bike_id", Note.class);
         query.setParameter("bike_id", bikeId);
         return query.getResultList();
     }

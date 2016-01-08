@@ -10,4 +10,7 @@ INSERT INTO webapp.user_role (role,user_id) VALUES ( '2', '1');
 INSERT INTO webapp.user_role (role,user_id) VALUES ( '0', '2');
 INSERT INTO webapp.user_role (role,user_id) VALUES ( '1', '2');
 INSERT INTO webapp.user_role (role,user_id) VALUES ( '2', '2');
--- INSERT INTO webapp.bike (version,manufacturer,enabled,model,serial_number,bike_status) VALUES (0, 'Kross', 1, 'CityB200', 'XNXCM1231432', 'TO_BORROW');
+INSERT INTO webapp.user_role (role,user_id) VALUES ( '1', '3');
+INSERT INTO webapp.user_role (role,user_id) VALUES ( '2', '3');
+
+INSERT INTO webapp.bike (manufacturer,enabled,model,serial_number, station_id, status) VALUES ('Kross', 1, 'CityB200', 'XNXCM1231432', NULL, 'NEW' );

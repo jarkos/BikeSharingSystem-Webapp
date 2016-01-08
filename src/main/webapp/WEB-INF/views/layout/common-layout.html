@@ -39,7 +39,6 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" th:href="@{/home}">Dashboard</a></li>
-                <li><a href="#">Ustawienia</a></li>
                 <li><a href="#">Profil</a></li>
                 <li><a href="#" th:href="@{/logout}">Wyloguj</a></li>
             </ul>
@@ -88,6 +87,18 @@
             <ul sec:authorize="hasRole('ROLE_ADMIN')" class="nav nav-sidebar">
                 <li th:classappend="${page == 'notyfy' ? 'active' : ''}">
                     <a href="#" th:href="@{/admin/bikes}">Powiadomienia</a>
+                </li>
+            </ul>
+
+            <ul sec:authorize="hasRole('ROLE_ADMIN')" class="nav nav-sidebar">
+                <li th:classappend="${page == 'history' ? 'active' : ''}">
+                    <a href="#" th:href="@{/admin/history/customers}">Historia - klienci</a>
+                </li>
+            </ul>
+
+            <ul sec:authorize="hasRole('ROLE_ADMIN')" class="nav nav-sidebar">
+                <li th:classappend="${page == 'history' ? 'active' : ''}">
+                    <a href="#" th:href="@{/admin/history/customers}">Historia - pracownicy</a>
                 </li>
             </ul>
 

@@ -23,7 +23,7 @@ public class HistoryService {
         return historyDao.findHistoryById(id);
     }
 
-    public List<History> findAllHistories() {
+    public List<History> findAllHistoryEntries() {
         return historyDao.findAllHistoryEntries();
     }
 
@@ -31,11 +31,11 @@ public class HistoryService {
         historyDao.save(history);
     }
 
-    public void deleteBike(History history) {
+    public void deleteHistory(History history) {
         historyDao.delete(history);
     }
 
-    public void updateBike(History history){
+    public void updateHistory(History history){
         historyDao.update(history);
     }
 

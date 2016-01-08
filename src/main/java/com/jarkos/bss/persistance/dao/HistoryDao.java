@@ -55,25 +55,25 @@ public class HistoryDao {
     }
 
     public List<History> findAllBorrowBikeOperations() {
-        TypedQuery<History> query = entityManager.createQuery("SELECT b FROM History AS b WHERE b.operation_type=:operation_type",
+        TypedQuery<History> query = entityManager.createQuery("SELECT b FROM History AS b WHERE b.operationType=:operation_type",
                 History.class);
-        query.setParameter("operation_type", OperationType.BORROW_BIKE.name());
+        query.setParameter("operation_type", OperationType.BORROW_BIKE);
 
         return query.getResultList();
     }
 
     public List<History> findAllCustomersOperations() {
         TypedQuery<History> query = entityManager.createQuery("SELECT b FROM History AS b WHERE " +
-                "b.operation_type=:operation_type1 OR b.operation_type=:operation_type2", History.class);
-        query.setParameter("operation_type1", OperationType.BORROW_BIKE);
-        query.setParameter("operation_type2", OperationType.RETURN_BIKE);
+                "b.operationType=:operation_type_borrow OR b.operationType=:operation_type_return", History.class);
+        query.setParameter("operation_type_borrow", OperationType.BORROW_BIKE);
+        query.setParameter("operation_type_return", OperationType.RETURN_BIKE);
 
         return query.getResultList();
     }
 
     public List<History> findAllOperationsByCustomerId(Integer user_id) {
         TypedQuery<History> query = entityManager.createQuery("SELECT b FROM History AS b WHERE " +
-                "b.operation_type=:operation_type1 OR b.operation_type=:operation_type2" +
+                "b.operation_type=:operation_type1 OR b.operationType=:operation_type2" +
                 " AND b.user_id=:user_id", History.class);
         query.setParameter("operation_type1", OperationType.BORROW_BIKE);
         query.setParameter("operation_type2", OperationType.RETURN_BIKE);
@@ -84,7 +84,7 @@ public class HistoryDao {
 
     public List<History> findAllWorkersOperations() {
         TypedQuery<History> query = entityManager.createQuery("SELECT b FROM History AS b WHERE " +
-                "b.operation_type=:operation_type1 OR b.operation_type=:operation_type2", History.class);
+                "b.operationType=:operation_type1 OR b.operationType=:operation_type2", History.class);
         query.setParameter("operation_type1", OperationType.TRANSFER_B_FROM);
         query.setParameter("operation_type2", OperationType.TRANSFER_B_TO);
 

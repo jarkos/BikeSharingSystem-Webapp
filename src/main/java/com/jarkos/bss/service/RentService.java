@@ -6,6 +6,7 @@ import com.jarkos.bss.persistance.entity.Bike;
 import com.jarkos.bss.persistance.entity.Station;
 import com.jarkos.bss.persistance.entity.User;
 import com.jarkos.bss.persistance.enums.BikeStatus;
+import com.jarkos.bss.persistance.enums.OperationType;
 import com.jarkos.bss.persistance.exceptions.CannotBorrowMoreBikesException;
 import com.jarkos.bss.persistance.exceptions.NotRequiredAccountBalanceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by Jarek on 2015-12-28.
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class RentService {
 
     private static final int MONEY_FOR_BIKE_BORROWING = 5;
@@ -30,7 +31,9 @@ public class RentService {
     @Autowired
     private StationService stationService;
 
-    @Transactional(rollbackFor = Exception.class)
+    @Autowired
+    private HistoryUtils historyUtils;
+
     public void borrowBike(BorrowOperationDto borrowOperationDto) throws NotRequiredAccountBalanceException, CannotBorrowMoreBikesException {
         User user = userService.findUserById(borrowOperationDto.getUserId());
         Bike bike = bikeService.findBikeById(borrowOperationDto.getBikeId());
@@ -46,6 +49,8 @@ public class RentService {
             userService.update(user);
             bikeService.updateBike(bike);
             stationService.updateStation(station);
+
+            historyUtils.addHistoryEntry(OperationType.BORROW_BIKE, borrowOperationDto);
         }
     }
 
@@ -67,8 +72,7 @@ public class RentService {
         return false;
     }
 
-    @Transactional(rollbackFor = Exception.class)
-    public void returnBike (ReturnOperationDto returnBike) {
+    public void returnBike(ReturnOperationDto returnBike) {
         User user = userService.findUserById(returnBike.getUserId());
         Bike bike = bikeService.findBikeById(returnBike.getBikeId());
         Station station = stationService.findStationById(returnBike.getStationId());
@@ -81,5 +85,8 @@ public class RentService {
         userService.update(user);
         bikeService.updateBike(bike);
         stationService.updateStation(station);
+
+        historyUtils.addHistoryEntry(OperationType.RETURN_BIKE, returnBike);
     }
+
 }

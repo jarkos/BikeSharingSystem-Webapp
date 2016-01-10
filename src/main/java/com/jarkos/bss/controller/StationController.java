@@ -67,7 +67,7 @@ public class StationController {
         Station newStation = stationService.saveStation(station);
         Location location = station.getLocation();
         location.setStation(newStation);
-        locationService.saveLocaiton(location);
+        locationService.saveLocation(location);
         return "redirect:/admin/stations?create=true";
     }
 

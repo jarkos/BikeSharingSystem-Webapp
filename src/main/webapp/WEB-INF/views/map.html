@@ -42,7 +42,8 @@
             for (i = 0; i < locaLat.length; i++) {
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(locaLat[i], locLon[i]),
-                    map: map
+                    map: map,
+                    icon: '../../../resources/images/ic.png'
                 });
             }
             //]]>

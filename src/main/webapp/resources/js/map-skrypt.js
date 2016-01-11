@@ -32,7 +32,8 @@ function initialize() {
         position: latLng,
         title: 'Point A',
         map: map,
-        draggable: true
+        draggable: true,
+        icon: '../../../resources/images/ic.png'
     });
 
     // Update current position info.

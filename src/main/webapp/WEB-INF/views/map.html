@@ -28,8 +28,218 @@
     <script type="text/javascript" th:inline="javascript">
         var geocoder = new google.maps.Geocoder();
         function initialize() {
-            var latLng = new google.maps.LatLng(51.759, 19.459);
 
+            var customMapType = new google.maps.StyledMapType([
+                {
+                    "featureType": "landscape",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "hue": "#FFBB00"
+                        },
+                        {
+                            "saturation": 43.400000000000006
+                        },
+                        {
+                            "lightness": 37.599999999999994
+                        },
+                        {
+                            "gamma": 1
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "hue": "#00FF6A"
+                        },
+                        {
+                            "saturation": -1.0989010989011234
+                        },
+                        {
+                            "lightness": 11.200000000000017
+                        },
+                        {
+                            "gamma": 1
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "hue": "#FFC200"
+                        },
+                        {
+                            "saturation": -61.8
+                        },
+                        {
+                            "lightness": 45.599999999999994
+                        },
+                        {
+                            "gamma": 1
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "saturation": "100"
+                        },
+                        {
+                            "lightness": "-42"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "saturation": "-75"
+                        },
+                        {
+                            "color": "#763b3b"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "color": "#502e2e"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "color": "#221c1c"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#6a6a6a"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.arterial",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "hue": "#FF0300"
+                        },
+                        {
+                            "saturation": -100
+                        },
+                        {
+                            "lightness": 51.19999999999999
+                        },
+                        {
+                            "gamma": 1
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.arterial",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "color": "#bba91f"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.arterial",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#443636"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.local",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "hue": "#FF0300"
+                        },
+                        {
+                            "saturation": -100
+                        },
+                        {
+                            "lightness": 52
+                        },
+                        {
+                            "gamma": 1
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.local",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "color": "#a89676"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.local",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "saturation": "31"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.local",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#5a4141"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "hue": "#0078FF"
+                        },
+                        {
+                            "saturation": -13.200000000000003
+                        },
+                        {
+                            "lightness": 2.4000000000000057
+                        },
+                        {
+                            "gamma": 1
+                        }
+                    ]
+                }
+            ], {
+                name: 'Custom Style'
+            });
+            var customMapTypeId = 'custom_style';
+
+            var latLng = new google.maps.LatLng(51.759, 19.459);
             var locaLat = [[${lat}]];
             var locLon = [[${lon}]];
             var addresses = [[${addresses}]];
@@ -45,8 +255,11 @@
             var map = new google.maps.Map(document.getElementById('mapCanvas'), {
                 zoom: 12,
                 center: latLng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: [google.maps.MapTypeId.ROADMAP, customMapTypeId]
             });
+
+            map.mapTypes.set(customMapTypeId, customMapType);
+            map.setMapTypeId(customMapTypeId);
 
             //<![CDATA[
             for (i = 0; i < locaLat.length; i++) {
@@ -59,14 +272,16 @@
             //]]>
             //<![CDATA[
             for (i = 0; i < locaLat.length; i++) {
+                var path1 = '/admin/stations/';
+                var path2 = '/edit/';
+                var fullPath = '<a href="' + path1 + ids[i] + path2 + '"class="button">Zarządzaj</a>';
                 infowindows[i] = new InfoBox({
-                    content:
-                    '<div id="infobox">' +
-                    '<b>' +'ID:' + ids[i] +' ' + addresses[i] + '</b> <br>' +
+                    content: '<div id="infobox">' +
+                    '<b>' + 'ID:' + ids[i] + ' ' + addresses[i] + '</b> <br>' +
                     'Liczba wolnych rowerów: ' + freeBikes[i] + ' <br>' +
-                    'Liczba miejsc: '+ spaces[i] + ' <br>' +
+                    'Liczba miejsc: ' + spaces[i] + ' <br>' +
                     'Liczba zajętych miejsc: ' + taken[i] + ' <br>' +
-                    '<a href="/admin/stations/ids[i]/edit/" class="button">Zarządzaj</a>' +
+                    fullPath +
                     ' </div>',
                     disableAutoPan: false,
                     maxWidth: 150,

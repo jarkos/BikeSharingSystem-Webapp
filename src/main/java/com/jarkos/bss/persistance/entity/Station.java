@@ -40,10 +40,10 @@ public class Station extends Persistent {
 
     public int getTakenSpaces() {
         if (bikes.size() > 0) {
-            return bikes.size();
+            return takenSpaces = bikes.size();
         }
         else {
-            return 0;
+            return takenSpaces = 0;
         }
     }
 

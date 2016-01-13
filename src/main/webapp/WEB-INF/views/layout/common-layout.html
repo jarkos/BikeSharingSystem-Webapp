@@ -91,14 +91,14 @@
             </ul>
 
             <ul sec:authorize="hasRole('ROLE_ADMIN')" class="nav nav-sidebar">
-                <li th:classappend="${page == 'history' ? 'active' : ''}">
+                <li th:classappend="${page == 'history-cl' ? 'active' : ''}">
                     <a href="#" th:href="@{/admin/history/customers}">Historia - klienci</a>
                 </li>
             </ul>
 
             <ul sec:authorize="hasRole('ROLE_ADMIN')" class="nav nav-sidebar">
-                <li th:classappend="${page == 'history' ? 'active' : ''}">
-                    <a href="#" th:href="@{/admin/history/customers}">Historia - pracownicy</a>
+                <li th:classappend="${page == 'history-wr' ? 'active' : ''}">
+                    <a href="#" th:href="@{/admin/history/workers}">Historia - pracownicy</a>
                 </li>
             </ul>
 

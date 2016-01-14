@@ -79,12 +79,6 @@
             </ul>
 
             <ul sec:authorize="hasRole('ROLE_ADMIN')" class="nav nav-sidebar">
-                <li th:classappend="${page == 'test' ? 'active' : ''}">
-                    <a href="#" th:href="@{/admin/test}">Test</a>
-                </li>
-            </ul>
-
-            <ul sec:authorize="hasRole('ROLE_ADMIN')" class="nav nav-sidebar">
                 <li th:classappend="${page == 'notyfy' ? 'active' : ''}">
                     <a href="#" th:href="@{/admin/bikes}">Powiadomienia</a>
                 </li>

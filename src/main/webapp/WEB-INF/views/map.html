@@ -277,11 +277,11 @@
                 var fullPath = '<a href="' + path1 + ids[i] + path2 + '"class="button">Zarządzaj</a>';
                 infowindows[i] = new InfoBox({
                     content: '<div id="infobox">' +
-                    '<b>' + 'ID:' + ids[i] + ' ' + addresses[i] + '</b> <br>' +
+                    '<b><h5>' + 'ID:' + ids[i] + ' ' + addresses[i] + '</h5></b>' +
                     'Liczba wolnych rowerów: ' + freeBikes[i] + ' <br>' +
                     'Liczba miejsc: ' + spaces[i] + ' <br>' +
-                    'Liczba zajętych miejsc: ' + taken[i] + ' <br>' +
-                    fullPath +
+                    'Liczba zajętych miejsc: ' + taken[i] + ' <br> <br>' +
+                     fullPath +
                     ' </div>',
                     disableAutoPan: false,
                     maxWidth: 150,
@@ -314,13 +314,30 @@
 
 <div layout:fragment="content">
     <style>
-        a.button {
-            -webkit-appearance: button;
-            -moz-appearance: button;
-            appearance: button;
-
+        .button{
+            display: inline-block;
+            *display: inline;
+            zoom: 1;
+            padding: 6px 20px;
+            margin: 0;
+            cursor: pointer;
+            border: 1px solid #bbb;
+            overflow: visible;
+            font: bold 13px arial, helvetica, sans-serif;
             text-decoration: none;
-            color: initial;
+            white-space: nowrap;
+            color: #555;
+            background-color: #ddd;
+            background-image: linear-gradient(top, rgba(255,255,255,1),
+            rgba(255,255,255,0)),
+            url(data:image/png;base64,iVBORw0KGg[...]QmCC);
+            transition: background-color .2s ease-out;
+            background-clip: padding-box; /* Fix bleeding */
+            border-radius: 3px;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, .3),
+            0 2px 2px -1px rgba(0, 0, 0, .5),
+            0 1px 0 rgba(255, 255, 255, .3) inset;
+            text-shadow: 0 1px 0 rgba(255,255,255, .9);
         }
 
         #mapCanvas {
@@ -359,11 +376,9 @@
         }
     </style>
     <div class="infobox-wrapper">
-        <tr th:each="adr, adrStat : ${addresses}">
             <div id="infobox">
-                The contents of your info box. It's very easy to create and customize.
+
             </div>
-        </tr>
     </div>
     <div id="mapCanvas"></div>
 </div>

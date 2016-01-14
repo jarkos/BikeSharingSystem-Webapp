@@ -274,14 +274,18 @@
             for (i = 0; i < locaLat.length; i++) {
                 var path1 = '/admin/stations/';
                 var path2 = '/edit/';
-                var fullPath = '<a href="' + path1 + ids[i] + path2 + '"class="button">Zarządzaj</a>';
+                var fullPathManage = '<a href="' + path1 + ids[i] + path2 + '"class="button">Zarządzaj</a>';
+                var path3 = '/admin/history/';
+                var path4 = '/station/';
+                var fullPathHistory = '<a href="' + path3 + ids[i] + path4 + '"class="button">Historia</a>';
+
                 infowindows[i] = new InfoBox({
                     content: '<div id="infobox">' +
                     '<b><h5>' + 'ID:' + ids[i] + ' ' + addresses[i] + '</h5></b>' +
                     'Liczba wolnych rowerów: ' + freeBikes[i] + ' <br>' +
                     'Liczba miejsc: ' + spaces[i] + ' <br>' +
                     'Liczba zajętych miejsc: ' + taken[i] + ' <br> <br>' +
-                     fullPath +
+                    fullPathManage + '  ' + fullPathHistory +
                     ' </div>',
                     disableAutoPan: false,
                     maxWidth: 150,

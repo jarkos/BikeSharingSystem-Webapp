@@ -38,6 +38,7 @@
                 <th>Rowery</th>
                 <th>Konfiguracja</th>
                 <th>Usuń</th>
+                <th>Historia</th>
                 <th>Data dodania</th>
                 <th>Data edycji</th>
             </tr>
@@ -52,6 +53,7 @@
                 <td><a href="editStation" th:href="@{/admin/stations/{id}/profile/(id=${station.id})}">lista rowerów</a></td>
                 <td><a href="editStation" th:href="@{/admin/stations/{id}/edit/(id=${station.id})}">konfiguruj</a></td>
                 <td><a href="deleteStation" th:href="@{/admin/stations/{id}/delete/(id=${station.id})}">usuń</a></td>
+                <td><a href="deleteStation" th:href="@{/admin/history/{id}/station(id=${station.id})}">historia</a></td>
                 <td th:text="${station.created}">25/10/2014</td>
                 <td th:text="${station.updated}">25/10/2014</td>
             </tr>

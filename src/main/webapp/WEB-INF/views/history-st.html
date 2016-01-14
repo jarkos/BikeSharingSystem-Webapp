@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/common-layout">
+
+<head>
+    <title>Historia</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+</head>
+
+<body th:with="page='stations'">
+
+<div layout:fragment="content">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tbody>
+            <div th:object="${station}">
+                <td style="font-size: 34px" th:text="'ID: ' + ${station.id}">3</td>
+                <td style="font-size: 34px" th:text="${station.location.locationAddress}"></td>
+                <td style="font-size: 34px" th:text="'Rowery: ' + ${station.takenSpaces}"></td>
+                <td style="font-size: 34px" th:text="'Miejsc: ' +${station.spaceNumber}"></td>
+            </div>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nr</th>
+                <th>Id pracownika</th>
+                <th>Login pracownika</th>
+                <th>Typ operacji</th>
+                <th>Nr roweru</th>
+                <th>Data</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="history, historyStat : ${historyList}">
+                <td th:text="${historyStat.count}">1</td>
+                <td th:text="${history.userId}">Admin</td>
+                <td th:text="${history.userLogin}">admin@oneous.com</td>
+                <td th:text="${history.operationType}">admin@oneous.com</td>
+                <td th:text="${history.bikeId}">25/10/2014</td>
+                <td th:text="${history.created}">25/10/2014</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

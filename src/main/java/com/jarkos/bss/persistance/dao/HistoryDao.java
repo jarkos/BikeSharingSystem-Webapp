@@ -33,12 +33,11 @@ public class HistoryDao {
         return entityManager.createQuery("SELECT b FROM History AS b", History.class).getResultList();
     }
 
-    public History findHistoryById(Integer id) {
-
-        TypedQuery<History> query = entityManager.createQuery("SELECT b FROM History AS b WHERE b.id=:id", History.class);
-        query.setParameter("id", id);
-
-        return getSingleResultOrNull(query);
+    public List<History> findHistoryById(Integer stationId) {
+        TypedQuery<History> query = entityManager.createQuery("SELECT b FROM History AS b WHERE b.stationId=:stationId ",
+                History.class);
+        query.setParameter("stationId", stationId);
+        return query.getResultList();
     }
 
     private History getSingleResultOrNull(TypedQuery<History> query) {

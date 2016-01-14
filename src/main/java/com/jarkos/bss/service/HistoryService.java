@@ -19,7 +19,7 @@ public class HistoryService {
     @Autowired
     private HistoryDao historyDao;
 
-    public History findHistoryById(Integer id) {
+    public List<History> findHistoryByStationId(Integer id) {
         return historyDao.findHistoryById(id);
     }
 

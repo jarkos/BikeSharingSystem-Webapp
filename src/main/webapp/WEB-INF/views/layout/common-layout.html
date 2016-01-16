@@ -67,18 +67,21 @@
                     <a href="#" th:href="@{/user/map}">Mapa stacji</a>
                 </li>
                 <li  sec:authorize="hasRole('ROLE_CUSTOMER')" th:classappend="${page == 'history-cl' ? 'active' : ''}">
+                    <a href="#" th:href="@{/home}">Doładowanie konta</a>
+                </li>
+                <li  sec:authorize="hasRole('ROLE_CUSTOMER')" th:classappend="${page == 'history-cl' ? 'active' : ''}">
                     <a href="#" th:href="@{/user/history}">Historia</a>
                 </li>
-                <li sec:authorize="hasRole('ROLE_ANONYMOUS')" th:classappend="${page == 'about' ? 'active' : ''}">
+                <li sec:authorize="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMER')" th:classappend="${page == 'about' ? 'active' : ''}">
                     <a href="../home.html" th:href="@{/home}">O nas</a>
                 </li>
-                <li sec:authorize="hasRole('ROLE_ANONYMOUS')" th:classappend="${page == 'prices' ? 'active' : ''}">
+                <li sec:authorize="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMER')" th:classappend="${page == 'prices' ? 'active' : ''}">
                     <a href="../home.html" th:href="@{/home}">Cennik</a>
                 </li>
-                <li sec:authorize="hasRole('ROLE_ANONYMOUS')" th:classappend="${page == 'reg' ? 'active' : ''}">
+                <li sec:authorize="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMER')" th:classappend="${page == 'reg' ? 'active' : ''}">
                     <a href="../home.html" th:href="@{/home}">Regulamin</a>
                 </li>
-                <li sec:authorize="hasRole('ROLE_ANONYMOUS')" th:classappend="${page == 'contact' ? 'active' : ''}">
+                <li sec:authorize="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMER')" th:classappend="${page == 'contact' ? 'active' : ''}">
                     <a href="../home.html" th:href="@{/home}">Kontakt</a>
                 </li>
             </ul>

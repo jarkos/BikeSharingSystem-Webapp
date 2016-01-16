@@ -16,9 +16,9 @@
         <table class="table table-striped">
             <tbody>
             <div th:object="${user}">
-                <td style="font-size: 34px" th:text="'User: ' + ${user.id}">3</td>
-                <td style="font-size: 34px" th:text="${user.username}"></td>
-                <td style="font-size: 34px" th:text="' - ' +${user.fullName}"></td>
+                <td style="font-size: 34px" th:text="'ID: ' + ${user.id}">3</td>
+                <td style="font-size: 34px" th:text="'Użytkownik: ' +${user.username}"></td>
+                <td style="font-size: 34px" th:text="${user.fullName}"></td>
             </div>
             </tbody>
         </table>

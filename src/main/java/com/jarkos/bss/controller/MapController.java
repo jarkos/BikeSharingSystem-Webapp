@@ -1,5 +1,6 @@
 package com.jarkos.bss.controller;
 
+import com.jarkos.bss.persistance.entity.Bike;
 import com.jarkos.bss.persistance.entity.Location;
 import com.jarkos.bss.persistance.entity.Station;
 import com.jarkos.bss.service.LocationService;
@@ -39,7 +40,7 @@ public class MapController {
     @RequestMapping("/user/map")
     public String getMapForCustomer(Model model) {
         getMapModelAttributes(model);
-        return "map";
+        return "map-cl";
     }
 
     private void getMapModelAttributes(Model model) {
@@ -62,9 +63,15 @@ public class MapController {
 
     private List<String> getFreeBikesNumber(List<Station> stations) {
         List<String> freeBikesNmb = new ArrayList<>();
+        int nmbOfAvailableBikes = 0;
         for (Station s : stations) {
-            freeBikesNmb.add(Integer.toString(s.getBikes().size()));
+            for(Bike b: s.getBikes()){
+            if(b.isEnabled() ==true )
+                nmbOfAvailableBikes++;
+            }
+
         }
+        freeBikesNmb.add(Integer.toString(nmbOfAvailableBikes));
         return freeBikesNmb;
     }
 

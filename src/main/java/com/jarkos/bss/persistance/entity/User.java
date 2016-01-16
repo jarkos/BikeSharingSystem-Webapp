@@ -45,6 +45,10 @@ public class User extends Persistent implements UserDetails {
     @JoinColumn(name = "bike_id")
     private Bike borrowedBike;
 
+    @OneToOne
+    @JoinColumn(name = "bike_booked_id")
+    private Bike bookedBike;
+
     @Column(nullable = false)
     private String fullName;
 
@@ -164,6 +168,14 @@ public class User extends Persistent implements UserDetails {
 
     public void setVerified(boolean verified) {
         this.verified = verified;
+    }
+
+    public Bike getBookedBike() {
+        return bookedBike;
+    }
+
+    public void setBookedBike(Bike bookedBike) {
+        this.bookedBike = bookedBike;
     }
 
 }

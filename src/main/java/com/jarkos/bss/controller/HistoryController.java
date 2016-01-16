@@ -50,7 +50,7 @@ public class HistoryController {
     @RequestMapping("/user/history")
     public String getUserHistory( Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName(); //get logged in username
+        String name = auth.getName();
         User currentUser = userService.findUserByUsername(name);
         model.addAttribute("historyList", historyService.findAllHistoryForCustomer(currentUser.getId()));
         model.addAttribute("user", userService.findUserById(currentUser.getId()));

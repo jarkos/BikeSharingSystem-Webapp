@@ -33,6 +33,7 @@ public class BikeService {
     }
 
     public void saveNewBike(Bike bike) {
+        bike.setBikeStatus(BikeStatus.NEW);
         bike.setEnabled(true);
         bikeDao.save(bike);
     }

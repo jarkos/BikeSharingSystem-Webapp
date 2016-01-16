@@ -5,9 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Jarek on 2015-12-01.
@@ -45,7 +43,10 @@ public class Bike extends Persistent {
     private List<Note> notes = new ArrayList<>();
 
     @OneToOne(mappedBy="borrowedBike")
-    private User currentUser;
+    private User rentUser;
+
+    @OneToOne(mappedBy="bookedBike")
+    private User bookUser;
 
     public String getManufacturer() {
         return manufacturer;
@@ -103,11 +104,19 @@ public class Bike extends Persistent {
         this.notes = notes;
     }
 
-    public User getCurrentUser() {
-        return currentUser;
+    public User getRentUser() {
+        return rentUser;
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+    public void setRentUser(User rentUser) {
+        this.rentUser = rentUser;
+    }
+
+    public User getBookUser() {
+        return bookUser;
+    }
+
+    public void setBookUser(User bookUser) {
+        this.bookUser = bookUser;
     }
 }

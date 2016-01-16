@@ -9,25 +9,17 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 </head>
 
-<body th:with="page='history-cl'">
+<body th:with="page='history-cls'">
 
 <div layout:fragment="content">
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <tbody>
-            <div th:object="${user}">
-                <td style="font-size: 34px" th:text="'User: ' + ${user.id}">3</td>
-                <td style="font-size: 34px" th:text="${user.username}"></td>
-                <td style="font-size: 34px" th:text="' - ' +${user.fullName}"></td>
-            </div>
-            </tbody>
-        </table>
-    </div>
+
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
                 <th>Nr</th>
+                <th>Id klienta</th>
+                <th>Login klienta</th>
                 <th>Typ operacji</th>
                 <th>Nr stacji</th>
                 <th>Nr roweru</th>
@@ -37,6 +29,8 @@
             <tbody>
             <tr th:each="history, historyStat : ${historyList}">
                 <td th:text="${historyStat.count}">1</td>
+                <td th:text="${history.userId}">Admin</td>
+                <td th:text="${history.userLogin}">admin@oneous.com</td>
                 <td th:text="${history.operationType}">admin@oneous.com</td>
                 <td th:text="${history.stationId}">Status</td>
                 <td th:text="${history.bikeId}">25/10/2014</td>

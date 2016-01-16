@@ -27,6 +27,9 @@
         <security:access-denied-handler error-page="/access-denied"/>
 
         <security:intercept-url pattern="/login" access="permitAll"/>
+        <security:intercept-url pattern="/" access="permitAll"/>
+        <security:intercept-url pattern="/map/" access="permitAll"/>
+        <security:intercept-url pattern="/user/**" access="hasRole('ROLE_CUSTOMER')"/>
         <security:intercept-url pattern="/externalApi/**" access="permitAll"/>
         <security:intercept-url pattern="/logout" access="isAuthenticated()"/>
 

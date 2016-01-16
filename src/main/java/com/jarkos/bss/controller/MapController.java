@@ -25,7 +25,24 @@ public class MapController {
     private StationService stationService;
 
     @RequestMapping("/admin/map")
-    public String getMap(Model model) {
+    public String getMapForAdmin(Model model) {
+        getMapModelAttributes(model);
+        return "map";
+    }
+
+    @RequestMapping("/map")
+    public String getMapForAnon(Model model) {
+        getMapModelAttributes(model);
+        return "map";
+    }
+
+    @RequestMapping("/user/map")
+    public String getMapForCustomer(Model model) {
+        getMapModelAttributes(model);
+        return "map";
+    }
+
+    private void getMapModelAttributes(Model model) {
         List<Station> stations = stationService.findAllStations();
         List<String> latList = getLat(stations);
         List<String> lonList = getLon(stations);
@@ -41,7 +58,6 @@ public class MapController {
         model.addAttribute("taken", takenList);
         model.addAttribute("freeBikes", freeBikesList);
         model.addAttribute("ids", idsList);
-        return "map";
     }
 
     private List<String> getFreeBikesNumber(List<Station> stations) {

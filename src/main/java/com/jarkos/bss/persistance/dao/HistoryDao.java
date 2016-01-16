@@ -72,10 +72,10 @@ public class HistoryDao {
 
     public List<History> findAllOperationsByCustomerId(Integer user_id) {
         TypedQuery<History> query = entityManager.createQuery("SELECT b FROM History AS b WHERE " +
-                "b.operation_type=:operation_type1 OR b.operationType=:operation_type2" +
-                " AND b.user_id=:user_id", History.class);
-        query.setParameter("operation_type1", OperationType.BORROW_BIKE);
-        query.setParameter("operation_type2", OperationType.RETURN_BIKE);
+                "b.operationType=:operation_type_borrow OR b.operationType=:operation_type_return" +
+                " AND b.userId=:user_id", History.class);
+        query.setParameter("operation_type_borrow", OperationType.BORROW_BIKE);
+        query.setParameter("operation_type_return", OperationType.RETURN_BIKE);
         query.setParameter("user_id", user_id);
 
         return query.getResultList();

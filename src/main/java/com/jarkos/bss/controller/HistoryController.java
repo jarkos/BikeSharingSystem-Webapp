@@ -1,8 +1,12 @@
 package com.jarkos.bss.controller;
 
+import com.jarkos.bss.persistance.entity.User;
 import com.jarkos.bss.service.HistoryService;
 import com.jarkos.bss.service.StationService;
+import com.jarkos.bss.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,10 +25,13 @@ public class HistoryController {
     @Autowired
     private StationService stationService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("/admin/history/customers")
     public String getAllCustomersHistory(Model model) {
         model.addAttribute("historyList", historyService.findAllCustomersOperations());
-        return "history-cl";
+        return "history-cls";
     }
 
     @RequestMapping("/admin/history/workers")
@@ -38,6 +45,16 @@ public class HistoryController {
         model.addAttribute("historyList", historyService.findHistoryByStationId(id));
         model.addAttribute("station", stationService.findStationById(id));
         return "history-st";
+    }
+
+    @RequestMapping("/user/history")
+    public String getUserHistory( Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName(); //get logged in username
+        User currentUser = userService.findUserByUsername(name);
+        model.addAttribute("historyList", historyService.findAllHistoryForCustomer(currentUser.getId()));
+        model.addAttribute("user", userService.findUserById(currentUser.getId()));
+        return "history-cl";
     }
 
 }

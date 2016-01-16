@@ -47,7 +47,7 @@ public class HistoryService {
         return historyDao.findAllBorrowBikeOperations();
     }
 
-    public List<History> findAllOperationsByCustomerId(Integer customerId) {
+    public List<History> findAllHistoryForCustomer(Integer customerId) {
         return historyDao.findAllOperationsByCustomerId(customerId);
     }
 

@@ -45,6 +45,15 @@ public class User extends Persistent implements UserDetails {
     @JoinColumn(name = "bike_id")
     private Bike borrowedBike;
 
+    @Column(nullable = false)
+    private String fullName;
+
+    @Column(nullable = false)
+    private String address;
+
+    @Column
+    private boolean verified;
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -131,6 +140,30 @@ public class User extends Persistent implements UserDetails {
 
     public void setBorrowedBike(Bike borrowedBike) {
         this.borrowedBike = borrowedBike;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 
 }
